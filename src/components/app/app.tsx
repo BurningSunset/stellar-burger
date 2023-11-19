@@ -1,16 +1,19 @@
 import React from 'react';
-import logo from '../../logo.svg';
+import AppHeader from '../app-header/app-header';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import {ingredientsList, constructorList} from '../../utils/data.js'
 import styles from './app.module.css';
-console.log(styles)
+
 
 function App() {
   return (
     <div className={styles.app}>
-      <header className={styles.appHeader}>
-        <p>
-          Скоро здесь будет первая страница нашего проекта!
-        </p>
-      </header>
+      <AppHeader />
+      <div className={styles.mainDiv}>
+        <BurgerIngredients ingredients={ingredientsList}/>
+        <BurgerConstructor ingredients={constructorList} img={constructorList[0].image}/>
+      </div>
     </div>
   );
 }

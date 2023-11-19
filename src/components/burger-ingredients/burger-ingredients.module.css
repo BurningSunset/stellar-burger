@@ -1,0 +1,31 @@
+.section {
+    width: 600px;
+    max-height: 832px;
+    overflow: hidden;
+}
+.h2 {
+    height: 40px;
+}
+.tab {
+    max-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ingredientBlock {
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    max-height: 620px;
+}
+.ingredientBlock::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.ingredientBlock::-webkit-scrollbar-track {
+    background: #2F2F37;
+
+}
+  
+.ingredientBlock::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
