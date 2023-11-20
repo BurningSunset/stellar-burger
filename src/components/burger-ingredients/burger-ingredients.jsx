@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
+import { ingredientsType } from '../../utils/PropTypes'
 function BurgerIngredients(ingredients) {
     const [current, setCurrent] = React.useState('one')
     return (
@@ -26,6 +27,10 @@ function BurgerIngredients(ingredients) {
         </section>
         
     )
+}
+
+BurgerIngredients.propTypes = {
+    ingredients: ingredientsType
 }
 
 export default BurgerIngredients
