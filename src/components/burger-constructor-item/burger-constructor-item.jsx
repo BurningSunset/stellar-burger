@@ -1,17 +1,23 @@
 import React from 'react';
 import styles from './burger-constructor-item.module.css'
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const BurgerConstructorItem = (props) => {
     return (
-        <ConstructorElement
-            extraClass={props.extraClass}
-            text={props.name}
-            price={props.price}
-            thumbnail={props.image}
-            type={props.type}
-            isLocked={props.isLocked}
-        />
+        <div className={styles.itemBlock}>
+            {props.isLocked !== true &&
+                <DragIcon type="primary" />
+            }
+            <ConstructorElement
+                extraClass={`${props.extraClass} ml-2`}
+                text={props.name}
+                price={props.price}
+                thumbnail={props.image}
+                type={props.type}
+                isLocked={props.isLocked}
+            />
+        </div>
+
     )
 }
 export default BurgerConstructorItem

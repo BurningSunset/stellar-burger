@@ -1,0 +1,5 @@
+.itemBlock {
+    /* background-color: rgba(255, 0, 0, 0.479); */
+    display: flex;
+    align-items: center;
+}

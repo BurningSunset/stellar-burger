@@ -5,9 +5,9 @@ import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ing
 function BurgerIngredients(ingredients) {
     const [current, setCurrent] = React.useState('one')
     return (
-        <section className={`pr-10 pt-10 mb-9 ${styles.section}`}>
+        <section className={`pr-10 pt-10 ${styles.section}`}>
             <h2 className={`text text_type_main-large ${styles.h2}`}>Соберите бургер</h2>
-            <div className={`mt-5 mb-10 ${styles.tab}`} style={{ display: 'flex' }}>
+            <div className={`mt-5 mb-10 ${styles.tab}`}>
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
                     Булки
                 </Tab>
