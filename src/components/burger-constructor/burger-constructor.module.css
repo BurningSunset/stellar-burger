@@ -1,12 +1,23 @@
 .section {
     background-color: aqua;
     width: 600px;
-    height: 816px;
+    height: max-content
 }
-.h2 {
-    height: 40px;
-    margin: auto;
+.ingredientBlock {
+    overflow-y: auto; 
+    max-height: 555px;
+    display: grid;
+    row-gap: 16px;
 }
-.block { 
+.ingredientBlock::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.ingredientBlock::-webkit-scrollbar-track {
+    background: #2F2F37;
 
+}
+  
+.ingredientBlock::-webkit-scrollbar-thumb {
+    background: #8585AD;
 }

@@ -1,7 +1,5 @@
 .app {
   background-color: #131316;
-  font-size: calc(10px + 2vmin);
-  color: white;
   height: 100%;
   margin: 0;
   overflow: hidden;

@@ -6,16 +6,16 @@ const BurgerConstructor= ({ingredients, img}) => {
     const filteredData = ingredients.filter(item => item.type !== "bun")
     return (
         <section className={`pt-25 ${styles.section}`}>
-            <h2 className={`text text_type_main-large ${styles.h2}`}>Конструктор</h2>
             <div className={`${styles.block}`}>
-                <ConstructorElement
+                <BurgerConstructorItem
                     type="top"
                     isLocked={true}
-                    text="Краторная булка N-200i (верх)"
+                    name="Краторная булка N-200i (верх)"
                     price={200}
-                    thumbnail={img}
+                    image={img}
                 />
-                {filteredData.map((item, index) => (
+                <div className={`mt-4 mb-4 ${styles.ingredientBlock}`}>
+                    {filteredData.map((item, index) => (
                     <BurgerConstructorItem
                         key={index}
                         name={item.name}
@@ -23,12 +23,13 @@ const BurgerConstructor= ({ingredients, img}) => {
                         image={item.image}
                     />
                 ))}
-                <ConstructorElement
+                </div>
+                <BurgerConstructorItem
                     type="bottom"
                     isLocked={true}
-                    text="Краторная булка N-200i (низ)"
+                    name="Краторная булка N-200i (низ)"
                     price={200}
-                    thumbnail={img}
+                    image={img}
                 />
             </div>
         </section>

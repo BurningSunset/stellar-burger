@@ -1,6 +1,6 @@
 .section {
     width: 600px;
-    max-height: 832px;
+    max-height: 1000px;
     overflow: hidden;
 }
 .h2 {
@@ -15,7 +15,7 @@
 .ingredientBlock {
     overflow-y: scroll; 
     overflow-x: hidden;
-    max-height: 620px;
+    max-height: 650px;
 }
 .ingredientBlock::-webkit-scrollbar {
     width: 8px;
