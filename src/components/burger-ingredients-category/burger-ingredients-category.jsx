@@ -8,9 +8,9 @@ const BurgerIngredientsCategory = ({ingredients, type, categoryHeading}) => {
         <div>
             <h3 className='text text_type_main-medium mb-6'>{categoryHeading}</h3>
             <div className={`mb-10 ${styles.block}`}>
-                {filteredData.map((item, index) => (
+                {filteredData.map((item) => (
                     <BurgerIngredientsItem
-                        key={index}
+                        key={item._id}
                         counterValue = {0}
                         ingImage = {item.image}
                         price = {item.price}
