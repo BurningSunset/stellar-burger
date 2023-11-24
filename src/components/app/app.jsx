@@ -5,6 +5,8 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import {constructorList} from '../../utils/data.js'
 import styles from './app.module.css';
 import useApi from '../../hooks/useApi';
+import Modal from '../modal/modal';
+
 
 function App() {
   const url = 'https://norma.nomoreparties.space/api/ingredients'
@@ -22,6 +24,10 @@ function App() {
   }, [])
   return (
     <div className={styles.app}>
+      <Modal
+        title='Тест'> 
+        <div>Тест тест тест</div>
+      </Modal>
       <AppHeader />
       <main className={styles.mainDiv}>
         <BurgerIngredients ingredients={ingredientsData}/>
