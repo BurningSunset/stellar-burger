@@ -1,10 +1,10 @@
-import React from 'react';
+import { React, useState } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
 import { ingredientsType } from '../../utils/PropTypes'
 function BurgerIngredients(ingredients) {
-    const [current, setCurrent] = React.useState('one')
+    const [current, setCurrent] = useState('one')
     return (
         <section className={`pr-10 pt-10 ${styles.section}`}>
             <h2 className={`text text_type_main-large ${styles.h2}`}>Соберите бургер</h2>

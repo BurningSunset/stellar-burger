@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './burger-constructor.module.css'
-import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import { ingredientsType } from '../../utils/PropTypes'
 
@@ -19,6 +19,9 @@ const BurgerConstructor = ({ingredients, img}) => {
                 />
                 <div className={`mt-4 mb-4 ${styles.ingredientBlock}`}>
                     {filteredData.map((item, index) => (
+                        // Стоит ли указывать _id в качестве ключа
+                        // для каждого ингр. в конструкторе?
+                        // ингр. здесь могут повторяться
                     <BurgerConstructorItem
                         key={index}
                         name={item.name}

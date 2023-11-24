@@ -19,12 +19,9 @@
 .ingredientBlock::-webkit-scrollbar {
     width: 8px;
 }
-  
 .ingredientBlock::-webkit-scrollbar-track {
     background: #2F2F37;
-
 }
-  
 .ingredientBlock::-webkit-scrollbar-thumb {
     background: #8585AD;
 }
