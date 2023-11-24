@@ -10,10 +10,11 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <div className={styles.mainDiv}>
+      {/* поменять div на main? */}
+      <main className={styles.mainDiv}>
         <BurgerIngredients ingredients={ingredientsList}/>
         <BurgerConstructor ingredients={constructorList} img={constructorList[0].image}/>
-      </div>
+      </main>
     </div>
   );
 }
