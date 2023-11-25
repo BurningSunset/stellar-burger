@@ -1,9 +1,7 @@
-import React from 'react';
 import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 const BurgerIngredientsItem = (props) => {
-
     const handleClick = () => {
         props.onClick(props.id)
         props.showModal()
@@ -23,6 +21,7 @@ const BurgerIngredientsItem = (props) => {
         </div>
     )
 }
+
 BurgerIngredientsItem.propTypes = {
     onClick: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,

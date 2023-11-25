@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './burger-constructor-item.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
@@ -18,7 +17,6 @@ const BurgerConstructorItem = (props) => {
                 isLocked={props.isLocked}
             />
         </div>
-
     )
 }
 
@@ -30,21 +28,5 @@ BurgerConstructorItem.propTypes = {
     isLocked: PropTypes.bool,
     extraClass: PropTypes.string
 }
-
-// <BurgerConstructorItem
-// key={index}
-// name={item.name}
-// price={item.price}
-// image={item.image}
-// />
-// ))}
-// </div>
-// <BurgerConstructorItem
-// extraClass='ml-8'
-// type="bottom"
-// isLocked={true}
-// name="Краторная булка N-200i (низ)"
-// price={200}
-// image={img}
 
 export default BurgerConstructorItem

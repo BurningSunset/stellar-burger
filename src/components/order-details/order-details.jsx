@@ -14,8 +14,6 @@ const OrderDetails = (props) => {
     )
 }
 
-
-
 OrderDetails.propTypes = {
     id: PropTypes.string.isRequired
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './burger-ingredients-category.module.css'
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 import ingredientType from '../../utils/PropTypes'

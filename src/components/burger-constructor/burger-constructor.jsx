@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './burger-constructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
@@ -52,7 +51,6 @@ const BurgerConstructor = ({ingredients, img, showModal}) => {
         </section>
     )
 }
-
 
 BurgerConstructor.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientType).isRequired,

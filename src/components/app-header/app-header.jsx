@@ -1,4 +1,3 @@
-import React from 'react';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './app-header.module.css'
 function AppHeader() {
@@ -26,7 +25,6 @@ function AppHeader() {
                     <ProfileIcon type="secondary" />
                     <p className='m-2 text text_type_main-default text_color_inactive'>Личный кабинет</p>
                 </a>
-
             </nav>
         </header>
     )

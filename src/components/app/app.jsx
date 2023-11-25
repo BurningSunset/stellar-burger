@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -27,13 +27,7 @@ function App() {
 
   const [isOrderModalVisible, setOrderModalVisible] = useState(false);
   const [isIngredientModalVisible, setIngredientModalVisible] = useState(false);
-  const [modalOrderData, setModalOrderData] = useState({})
   const [modalIngredientData, setModalIngredientData] = useState({})
- 
-
-  useEffect(() => {
-    setModalOrderData(OrderDetails)
-  },[])
 
   const showOrderModal = () => {
     setOrderModalVisible(true)
