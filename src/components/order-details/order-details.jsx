@@ -1,5 +1,6 @@
 import styles from './order-details.module.css'
 import succesIcon from '../../images/graphics.svg'
+import PropTypes from 'prop-types'
 
 const OrderDetails = (props) => {
     return (
@@ -11,6 +12,12 @@ const OrderDetails = (props) => {
             <p className={`text text_type_main-default text_color_inactive mb-30`}>Дождитесь готовности на орбитальной станции</p>
         </div>
     )
+}
+
+
+
+OrderDetails.propTypes = {
+    id: PropTypes.string.isRequired
 }
 
 export default OrderDetails

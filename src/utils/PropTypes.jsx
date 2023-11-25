@@ -15,6 +15,4 @@ const ingredientType = PropTypes.shape({
     "__v":PropTypes.number.isRequired,
 })
 
-const ingredientsType = PropTypes.arrayOf(ingredientType).isRequired
-
-export { ingredientType, ingredientsType } 
+export default ingredientType

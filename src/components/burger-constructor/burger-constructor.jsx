@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './burger-constructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
-import { ingredientsType } from '../../utils/PropTypes'
+import ingredientType from '../../utils/PropTypes'
+import PropTypes from 'prop-types'
 
-const BurgerConstructor = ({ingredients, img, showModal, orderData}) => {
+const BurgerConstructor = ({ingredients, img, showModal}) => {
     const filteredData = ingredients.filter(item => item.type !== "bun")
     return (
         <section className={`pt-25 ${styles.section} ml-4 mr-4`}>
@@ -54,7 +55,9 @@ const BurgerConstructor = ({ingredients, img, showModal, orderData}) => {
 
 
 BurgerConstructor.propTypes = {
-    ingredients: ingredientsType
+    ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+    img: PropTypes.string.isRequired, 
+    showModal: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor

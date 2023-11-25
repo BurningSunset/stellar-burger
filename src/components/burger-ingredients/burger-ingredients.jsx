@@ -2,8 +2,9 @@ import { React, useState } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-import { ingredientsType } from '../../utils/PropTypes'
-function BurgerIngredients({ingredients, showModal}) {
+import ingredientType from '../../utils/PropTypes'
+import PropTypes from 'prop-types'
+function BurgerIngredients({ingredients, showModal, onIngredientClick}) {
     const [current, setCurrent] = useState('one')
     return (
         <section className={`pr-10 pt-10 ${styles.section}`}>
@@ -20,16 +21,18 @@ function BurgerIngredients({ingredients, showModal}) {
                 </Tab>
             </div>
             <div className={styles.ingredientBlock}>
-                <BurgerIngredientsCategory ingredients={ingredients} type="bun" categoryHeading="Булки" showModal={showModal}/>
-                <BurgerIngredientsCategory ingredients={ingredients} type="sauce" categoryHeading="Соусы" showModal={showModal}/>
-                <BurgerIngredientsCategory ingredients={ingredients} type="main" categoryHeading="Начинки" showModal={showModal}/>
+                <BurgerIngredientsCategory ingredients={ingredients} type="bun" categoryHeading="Булки" showModal={showModal} onIngredientClick={onIngredientClick}/>
+                <BurgerIngredientsCategory ingredients={ingredients} type="sauce" categoryHeading="Соусы" showModal={showModal} onIngredientClick={onIngredientClick}/>
+                <BurgerIngredientsCategory ingredients={ingredients} type="main" categoryHeading="Начинки" showModal={showModal} onIngredientClick={onIngredientClick}/>
             </div>
         </section>
     )
 }
 
 BurgerIngredients.propTypes = {
-    ingredients: ingredientsType
+    ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+    showModal: PropTypes.func.isRequired,
+    onIngredientClick: PropTypes.func.isRequired, 
 }
 
 export default BurgerIngredients

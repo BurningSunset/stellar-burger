@@ -7,6 +7,7 @@ import styles from './app.module.css';
 import useApi from '../../hooks/useApi';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 
 function App() {
@@ -33,7 +34,6 @@ function App() {
   useEffect(() => {
     setModalOrderData(OrderDetails)
   },[])
-  console.log(modalOrderData)
 
   const showOrderModal = () => {
     setOrderModalVisible(true)
@@ -51,13 +51,21 @@ function App() {
     setIngredientModalVisible(false)
   }
 
+  const handleIngredientClick = (ingredientId) => {
+    setModalIngredientData(ingredientId)
+  }
+
   return (
     <div className={styles.app}>
       <Modal
-        title='Тест'
+        title='Детали ингредиента'
         isOverlayVisible={isIngredientModalVisible} 
-        onHide={closeIngredientModal}>
-        <div>Тест тест тест</div>
+        onHide={closeIngredientModal}
+      >
+        <IngredientDetails
+          id={modalIngredientData}
+          data={ingredientsData}
+        />
       </Modal>
       <Modal
         isOverlayVisible={isOrderModalVisible} 
@@ -73,6 +81,7 @@ function App() {
         <BurgerIngredients 
           ingredients={ingredientsData}
           showModal={showIngredientModal}
+          onIngredientClick={handleIngredientClick}
         />
         {/* пока что мы не можем динамично изменять данные для конструктора */}
         {/* мб когда будет реализован drag n drop сделать массив, в который добавляются */}
