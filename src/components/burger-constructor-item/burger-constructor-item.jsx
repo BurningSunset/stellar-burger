@@ -9,7 +9,7 @@ const BurgerConstructorItem = (props) => {
                 <DragIcon type="primary" />
             }
             <ConstructorElement
-                extraClass={`${props.extraClass} ml-2`}
+                extraClass={props.extraClass ? `${props.extraClass} ml-2 ${styles.spanOnMiddle}` : `ml-2 ${styles.spanOnMiddle}`}
                 text={props.name}
                 price={props.price}
                 thumbnail={props.image}

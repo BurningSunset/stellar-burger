@@ -4,7 +4,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import { ingredientsType } from '../../utils/PropTypes'
 
-const BurgerConstructor = ({ingredients, img}) => {
+const BurgerConstructor = ({ingredients, img, showModal, orderData}) => {
     const filteredData = ingredients.filter(item => item.type !== "bun")
     return (
         <section className={`pt-25 ${styles.section} ml-4 mr-4`}>
@@ -44,7 +44,7 @@ const BurgerConstructor = ({ingredients, img}) => {
                     <p className="text text_type_digits-medium mr-1 mb-2">{1000}
                     <CurrencyIcon type="primary" /></p>
                 </span>
-                <Button htmlType="button" type="primary" size="large">
+                <Button onClick={showModal} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>

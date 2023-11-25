@@ -3,7 +3,7 @@ import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 const BurgerIngredientsItem = (props) => {
     return (
-        <div className={`${styles.card} `}>
+        <div className={`${styles.card}`} onClick={props.showModal}>
             <div className={styles.counter}>
                 {props.counterValue !== undefined && <Counter count={props.counterValue}/> }
             </div>
