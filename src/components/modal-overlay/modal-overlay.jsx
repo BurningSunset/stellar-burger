@@ -9,15 +9,15 @@ const ModalOverlay = ({ children, isVisible, onHide }) => {
             onHide()
         }
     }
-    const EscClickHandler = (e) => {
+    const escClickHandler = (e) => {
         if (e.key === 'Escape') {
             onHide()
         }
     }
     useEffect(() => {
-        document.addEventListener('keydown', EscClickHandler)
+        document.addEventListener('keydown', escClickHandler)
         return () => 
-            document.removeEventListener('keydown', EscClickHandler)
+            document.removeEventListener('keydown', escClickHandler)
     },[])
     return (
         <div className={`${styles.overlay} ${overlayClassName}`} onClick={overlayClickHandler}>

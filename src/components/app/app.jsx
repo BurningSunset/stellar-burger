@@ -20,9 +20,7 @@ function App() {
     .then((response) => {
       setIngredientsData(response.data);
     })
-    .catch((error) => {
-      console.log(error);
-    })
+    .catch(console.error)
   }, [])
 
   const [isOrderModalVisible, setOrderModalVisible] = useState(false);
