@@ -1,26 +1,22 @@
-import { useState } from 'react';
 const useApi = (apiUrl) => {
-  const [error, setError] = useState(null);
   const handleResponse = (response) => {
     if (response.ok) {
-      return response.json()
+      return response
     }
-    setError(response.status)
+    return Promise.reject(`Error (handleResponse): ${response.status}`)
   }
   const getIngredientList = async () => {
-    const response = await fetch(apiUrl, {
-      method: 'GET'
-    });
-    const data = await handleResponse(response);
-    if (data && data.data) {
-      return data;
-    } else {
-        setError(`Error (getIngredientList): Invalid data structure`);
-    }
+    return fetch(apiUrl, {
+      method: 'GET',
+    })
+    .then(handleResponse)
+    .then(response => {
+      if (response.ok) {
+          return response.json()
+      }
+      return Promise.reject(`Error (handleResponse): ${response.status}`);
+  })
   };
-  return {
-    getIngredientList,
-    error
-  };
+  return {getIngredientList}
 }
 export default useApi;
