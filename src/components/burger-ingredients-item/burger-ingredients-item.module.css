@@ -1,0 +1,18 @@
+.card {
+    width: 272px;
+    height: 209px;
+    position: relative;
+}
+.counter {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.itemPrice {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.ingName {
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+.ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    max-height: 24px;
+}
+.active {
+    color: #f2f2f3
+}
+.nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 1280px;
+    align-items: center;
+    margin: auto;
+}
+.header {
+    background-color: #1c1c21;
+}
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}

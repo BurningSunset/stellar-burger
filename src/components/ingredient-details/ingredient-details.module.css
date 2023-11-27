@@ -1,0 +1,23 @@
+.ingredientContainer {
+    width: 520px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ingredientImage {
+    height: 240px;
+}
+.ingredientParamList {
+    display: flex;
+}
+.ingredientParam {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+p {
+    margin: 0;
+    font-size: 18px;
+}

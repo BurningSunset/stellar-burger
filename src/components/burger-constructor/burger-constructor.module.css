@@ -1,0 +1,30 @@
+.section {
+    width: 600px;
+    height: max-content
+}
+.ingredientBlock {
+    overflow-y: auto; 
+    max-height: 465px;
+    display: grid;
+    row-gap: 16px;
+}
+.ingredientBlock::-webkit-scrollbar {
+    width: 8px;
+}
+.ingredientBlock::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.ingredientBlock::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+.itemPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.purchase {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}

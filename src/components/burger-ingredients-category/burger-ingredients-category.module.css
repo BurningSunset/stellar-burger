@@ -1,0 +1,10 @@
+.block {
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(2, 272px); 
+    column-gap: 24px;
+    row-gap: 32px;
+}
+.h3 {
+    align-items: center;
+}
