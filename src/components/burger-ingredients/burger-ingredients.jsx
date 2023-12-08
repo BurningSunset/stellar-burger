@@ -4,7 +4,8 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
 import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
-function BurgerIngredients({ingredients, showModal, onIngredientClick}) {
+import { useSelector } from 'react-redux';
+function BurgerIngredients({showModal, onIngredientClick}) {
     const [current, setCurrent] = useState('one')
     return (
         <section className={`pr-10 pt-10 ${styles.section}`}>
@@ -21,16 +22,15 @@ function BurgerIngredients({ingredients, showModal, onIngredientClick}) {
                 </Tab>
             </div>
             <div className={styles.ingredientBlock}>
-                <BurgerIngredientsCategory ingredients={ingredients} type="bun" categoryHeading="Булки" showModal={showModal} onIngredientClick={onIngredientClick}/>
-                <BurgerIngredientsCategory ingredients={ingredients} type="sauce" categoryHeading="Соусы" showModal={showModal} onIngredientClick={onIngredientClick}/>
-                <BurgerIngredientsCategory ingredients={ingredients} type="main" categoryHeading="Начинки" showModal={showModal} onIngredientClick={onIngredientClick}/>
+                <BurgerIngredientsCategory type="bun" categoryHeading="Булки" showModal={showModal} onIngredientClick={onIngredientClick}/>
+                <BurgerIngredientsCategory type="sauce" categoryHeading="Соусы" showModal={showModal} onIngredientClick={onIngredientClick}/>
+                <BurgerIngredientsCategory type="main" categoryHeading="Начинки" showModal={showModal} onIngredientClick={onIngredientClick}/> 
             </div>
         </section>
     )
 }
 
 BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientType).isRequired,
     showModal: PropTypes.func.isRequired,
     onIngredientClick: PropTypes.func.isRequired, 
 }

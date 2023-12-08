@@ -1,5 +1,5 @@
 export const initialState = {
-    allIngredients: [],
+    getIngredients: [],
     currentConstructorIngredients: [],
     currentIngredient: null,
     createdOrder: null

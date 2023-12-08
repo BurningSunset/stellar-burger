@@ -8,19 +8,28 @@ import useApi from '../../hooks/useApi';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import {url} from '../../utils/api'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/getIngredients'
 
 function App() {
-  const url = 'https://norma.nomoreparties.space/api/ingredients'
   // создаём экземпляр useApi
   const api = useApi(url)
   const [ingredientsData, setIngredientsData] = useState([])
+  // useEffect(() => {
+  //   api.getIngredientList()
+  //   .then((response) => {
+  //     setIngredientsData(response.data);
+  //   })
+  //   .catch(console.error)
+  // }, [])
+
+  const dispatch = useDispatch()
   useEffect(() => {
-    api.getIngredientList()
-    .then((response) => {
-      setIngredientsData(response.data);
-    })
-    .catch(console.error)
+    dispatch(
+      getIngredients()
+    )
   }, [])
 
   const [isOrderModalVisible, setOrderModalVisible] = useState(false);
@@ -71,18 +80,17 @@ function App() {
       <AppHeader />
       <main className={styles.mainDiv}>
         <BurgerIngredients 
-          ingredients={ingredientsData}
           showModal={showIngredientModal}
           onIngredientClick={handleIngredientClick}
         />
         {/* пока что мы не можем динамично изменять данные для конструктора */}
         {/* мб когда будет реализован drag n drop сделать массив, в который добавляются */}
         {/* ингредиенты? первый элемент будет фиксированно булочкой */}
-        <BurgerConstructor 
+        {/* <BurgerConstructor 
           ingredients={ingredientsData} 
           img={constructorList[0].image}
           showModal={showOrderModal}
-        />
+        /> */}
       </main>
     </div>
   );
