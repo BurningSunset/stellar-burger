@@ -13,17 +13,12 @@ import {url} from '../../utils/api'
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/getIngredients'
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 function App() {
   // создаём экземпляр useApi
   const api = useApi(url)
-  const [ingredientsData, setIngredientsData] = useState([])
-  // useEffect(() => {
-  //   api.getIngredientList()
-  //   .then((response) => {
-  //     setIngredientsData(response.data);
-  //   })
-  //   .catch(console.error)
-  // }, [])
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -63,10 +58,10 @@ function App() {
         isOverlayVisible={isIngredientModalVisible} 
         onHide={closeIngredientModal}
       >
-        <IngredientDetails
+        {/* <IngredientDetails
           id={modalIngredientData}
-          data={ingredientsData}
-        />
+          // data={ingredientsData}
+        /> */}
       </Modal>
       <Modal
         isOverlayVisible={isOrderModalVisible} 
@@ -79,18 +74,15 @@ function App() {
       </Modal>
       <AppHeader />
       <main className={styles.mainDiv}>
-        <BurgerIngredients 
-          showModal={showIngredientModal}
-          onIngredientClick={handleIngredientClick}
-        />
-        {/* пока что мы не можем динамично изменять данные для конструктора */}
-        {/* мб когда будет реализован drag n drop сделать массив, в который добавляются */}
-        {/* ингредиенты? первый элемент будет фиксированно булочкой */}
-        {/* <BurgerConstructor 
-          ingredients={ingredientsData} 
-          img={constructorList[0].image}
-          showModal={showOrderModal}
-        /> */}
+				<DndProvider backend={HTML5Backend}>
+          <BurgerIngredients 
+            showModal={showIngredientModal}
+            onIngredientClick={handleIngredientClick}
+          />
+          <BurgerConstructor 
+            showModal={showOrderModal}
+          /> 
+        </DndProvider>
       </main>
     </div>
   );

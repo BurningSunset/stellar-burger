@@ -15,12 +15,8 @@ const BurgerIngredientsCategory = ({type, categoryHeading, showModal, onIngredie
                     <BurgerIngredientsItem
                         onClick={onIngredientClick}
                         showModal={showModal}  
+                        item={item}
                         key={item._id}
-                        id={item._id}
-                        counterValue = {0}
-                        ingImage = {item.image}
-                        price = {item.price}
-                        name = {item.name}
                     />
                 ))}
             </div>

@@ -42,15 +42,15 @@ const IngredientDetails = (props) => {
     )
 }
 
-IngredientDetails.propTypes = {
-    data: PropTypes.arrayOf(ingredientType).isRequired,
-    // указал второй тип object, потому что при инициализации
-    // у нас пропс id - пустой объект
-    // потом становится string
-    id: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object,
-      ]).isRequired
-}
+// IngredientDetails.propTypes = {
+//     data: PropTypes.arrayOf(ingredientType).isRequired,
+//     // указал второй тип object, потому что при инициализации
+//     // у нас пропс id - пустой объект
+//     // потом становится string
+//     id: PropTypes.oneOfType([
+//         PropTypes.string,
+//         PropTypes.object,
+//       ]).isRequired
+// }
 
 export default IngredientDetails
