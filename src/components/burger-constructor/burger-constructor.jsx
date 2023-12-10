@@ -13,11 +13,10 @@ import { submitOrder } from '../../services/actions/createOrder'
 
 const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
-
     let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
     let totalCost = 0
 
-    if (ingredientList.length !== 0 ) {
+    if (bun && ingredientList.length !== 0 ) {
         totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.price, 0);
         totalCost += bun.price * 2
     }
@@ -59,9 +58,12 @@ const BurgerConstructor = ({ showModal }) => {
       }
 
       const clickHandler = () => {
+        // соединяем булочки и другие ингредиенты
+        let fullIngredientList = [bun, ...ingredientList, bun]
         dispatch(
-            submitOrder(ingredientList)
+            submitOrder(fullIngredientList)
           )
+          showModal()
       }
 
     return (

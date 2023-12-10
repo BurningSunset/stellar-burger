@@ -1,4 +1,4 @@
-import { ORDER_SUBMIT, ORDER_FAILURE, ORDER_SUCCESS } from "../actions/createOrder";
+import { ORDER_SUBMIT, ORDER_FAILURE, ORDER_SUCCESS, CLEAR_ORDER } from "../actions/createOrder";
 
 const initialState = {
     order: null,
@@ -15,7 +15,6 @@ export const createOrderReducer = (state = initialState, action) => {
             }
         }
         case ORDER_SUCCESS: {
-            console.log(action.order)
             return {
                 ...state,
                 orderSubmit: false,
@@ -23,13 +22,19 @@ export const createOrderReducer = (state = initialState, action) => {
             }
         }
         case ORDER_FAILURE: {
-            console.log(action.error)
             return {
                 ...state,
                 orderSubmit: false,
                 orderError: action.error
             }
-        } default: {
+        }
+        case CLEAR_ORDER: {
+            return {
+                ...state,
+                order: action.null
+            }
+        }
+        default: {
             return state
         }
     }

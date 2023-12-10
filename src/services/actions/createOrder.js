@@ -4,6 +4,8 @@ export const ORDER_SUBMIT = 'ORDER_SUBMIT'
 export const ORDER_SUCCESS = 'ORDER_SUCCESS'
 export const ORDER_FAILURE = 'ORDER_FAILURE'
 
+export const CLEAR_ORDER = 'CLEAR_ORDER'
+
 export const submitOrder = (ingredients) => {
     return function(dispatch) {
         fetch(urlPost, {
@@ -30,5 +32,12 @@ export const submitOrder = (ingredients) => {
                 error: `Error catched: ${error}`
             })
         })
+    }
+}
+
+export const clearOrder = () => {
+    console.log('dismount')
+    return {
+        type: CLEAR_ORDER
     }
 }

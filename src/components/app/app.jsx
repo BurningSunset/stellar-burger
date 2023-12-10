@@ -63,10 +63,7 @@ function App() {
         isOverlayVisible={isOrderModalVisible} 
         onHide={closeOrderModal}
       >
-          {/* child */}
-        <OrderDetails 
-            id='034536'
-        />
+        <OrderDetails/>
       </Modal>
       <AppHeader />
       <main className={styles.mainDiv}>
