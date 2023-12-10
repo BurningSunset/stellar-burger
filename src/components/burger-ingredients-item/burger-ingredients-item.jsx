@@ -5,13 +5,14 @@ import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { incrementCounter } from '../../services/actions/getIngredients'
+import { setCurrentIngredient } from '../../services/actions/currentIngredient'
 
-const BurgerIngredientsItem = ({item, onClick, showModal}) => {
+const BurgerIngredientsItem = ({item, showModal}) => {
     
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        onClick(item._id)
+        dispatch(setCurrentIngredient(item))
         showModal()
     }
 

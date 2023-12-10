@@ -4,7 +4,7 @@ import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux';
 import { forwardRef } from 'react';
-const BurgerIngredientsCategory = forwardRef(({type, categoryHeading, showModal, onIngredientClick}, ref) => {
+const BurgerIngredientsCategory = forwardRef(({type, categoryHeading, showModal}, ref) => {
     const { ingredients } = useSelector(state => state.getIngredients)
     const filteredData = ingredients.filter(item => item.type === type)
 
@@ -14,7 +14,6 @@ const BurgerIngredientsCategory = forwardRef(({type, categoryHeading, showModal,
             <div className={`mb-10 ${styles.block}`}>
                 {filteredData.map((item) => (
                     <BurgerIngredientsItem
-                        onClick={onIngredientClick}
                         showModal={showModal}  
                         item={item}
                         key={item._id}
@@ -30,6 +29,5 @@ BurgerIngredientsCategory.propTypes = {
     type: PropTypes.string.isRequired,
     categoryHeading: PropTypes.string.isRequired,
     showModal: PropTypes.func.isRequired,
-    onIngredientClick: PropTypes.func.isRequired
 }
 export default BurgerIngredientsCategory

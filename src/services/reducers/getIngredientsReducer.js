@@ -5,7 +5,6 @@ import {
 
     INCREASE_COUNTER,
     DECREASE_COUNTER,
-    CLEAR_COUNTER
 } from '../actions/getIngredients'
 
 const initialState = {

@@ -59,9 +59,9 @@ function BurgerIngredients({showModal, onIngredientClick}) {
                 </Tab>
             </div>
             <div className={styles.ingredientBlock} ref={ingredientBlockRef} onScroll={categoryScroll}>
-                <BurgerIngredientsCategory type="bun" ref={bunRef} categoryHeading="Булки" showModal={showModal} onIngredientClick={onIngredientClick}/>
-                <BurgerIngredientsCategory type="sauce" ref={sauceRef} categoryHeading="Соусы" showModal={showModal} onIngredientClick={onIngredientClick}/>
-                <BurgerIngredientsCategory type="main" ref={mainRef} categoryHeading="Начинки" showModal={showModal} onIngredientClick={onIngredientClick}/> 
+                <BurgerIngredientsCategory type="bun" ref={bunRef} categoryHeading="Булки" showModal={showModal}/>
+                <BurgerIngredientsCategory type="sauce" ref={sauceRef} categoryHeading="Соусы" showModal={showModal}/>
+                <BurgerIngredientsCategory type="main" ref={mainRef} categoryHeading="Начинки" showModal={showModal}/> 
             </div>
         </section>
     )

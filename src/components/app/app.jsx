@@ -57,10 +57,7 @@ function App() {
         isOverlayVisible={isIngredientModalVisible} 
         onHide={closeIngredientModal}
       >
-        {/* <IngredientDetails
-          id={modalIngredientData}
-          // data={ingredientsData}
-        /> */}
+        <IngredientDetails /> 
       </Modal>
       <Modal
         isOverlayVisible={isOrderModalVisible} 

@@ -7,15 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
 const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClose}) => {
-
     const ref = useRef(null)
     const dispatch = useDispatch()
-
     const [, drag] = useDrag({
         type: "sort",
         item: {uid}
     })
-
     const [, drop] = useDrop({
         accept: "sort",
         drop(item) {
@@ -26,7 +23,6 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
             }
         }
     })
-
     drag(drop(ref))
 
     return (
