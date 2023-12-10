@@ -3,26 +3,43 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import PropTypes from 'prop-types'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import { incrementCounter } from '../../services/actions/getIngredients'
+
 const BurgerIngredientsItem = ({item, onClick, showModal}) => {
+    
+    const dispatch = useDispatch()
+
     const handleClick = () => {
-        onClick(item.id)
+        onClick(item._id)
         showModal()
+    }
+
+    const handleDrop = () => {
+        dispatch(incrementCounter(item))
     }
 
     const [{ isDragging }, drag] = useDrag(() => (
         {
         type: ItemTypes.INGREDIENT,
         item: {item},
+        end: (item, monitor) => {
+            // Проверяем, был ли успешный дроп
+            if (monitor.didDrop()) {
+                handleDrop();
+            }
+        },
         collect: (monitor) => ({
           isDragging: monitor.isDragging(),
         }),
-      }))
-      const opacity = isDragging ? 0.4 : 1
+    }))
+    const opacity = isDragging ? 0.4 : 1
+    // dispatch(incrementCounter(item.id));
 
     return (
         <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }} onClick={handleClick}>
             <div className={`${styles.counter} `}>
-                {item.counterValue !== undefined && <Counter count={item.counterValue}/> }
+                {item.counter !== 0 && <Counter count={item.counter}/> }
             </div>
             <img src={item.image} alt={item.name} className='ml-4 mr-4'></img>
             <span className={styles.itemPrice}>

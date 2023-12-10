@@ -9,20 +9,23 @@ import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes';
 import { ADD_ITEM, DELETE_ITEM, SET_BUN } from '../../services/actions/currentConstructorIngredients'
 import { useDispatch } from 'react-redux';
+import { decreaseCounter } from '../../services/actions/getIngredients'
+import { useState } from 'react';
 
 const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
-
+    const [currentBun, setCurrentBun ] = useState(null)
     const [{ canDrop }, drop] = useDrop(() => ({
         accept: ItemTypes.INGREDIENT,
         drop (ingredient) {
-            acceptIngredient(ingredient)
+            acceptIngredient(ingredient);
         },
         collect: (monitor) => ({
           canDrop: monitor.canDrop(),
         }),
       }))
       const dispatch = useDispatch()
+
       const acceptIngredient = (item) => {
         const ingredient = {
             ...item.item,
@@ -42,7 +45,7 @@ const BurgerConstructor = ({ showModal }) => {
       }
 
       const handleClose = (ingredient) => {
-        console.log(ingredient.item.uid ? ingredient.item.uid : ingredient)
+        dispatch(decreaseCounter(ingredient.item._id))
         dispatch({
             type: DELETE_ITEM,
             uid: ingredient.item.uid

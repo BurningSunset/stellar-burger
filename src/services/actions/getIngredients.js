@@ -6,8 +6,6 @@ export const GET_INGREDIENTS_FAILURE = 'GET_INGREDIENTS_FAILURE'
 
 export const INCREASE_COUNTER = 'INCREASE_COUNTER'
 export const DECREASE_COUNTER = 'DECREASE_COUNTER'
-export const CLEAR_COUNTER = 'CLEAR_CONTER'
-
 
 export function getIngredients() {
     return function(dispatch) {
@@ -37,3 +35,13 @@ export function getIngredients() {
         })
     }
 }
+
+export const incrementCounter = (ingredient) => ({
+    type: INCREASE_COUNTER,
+    payload: ingredient 
+})
+
+export const decreaseCounter = (ingredient) => ({
+    type: DECREASE_COUNTER,
+    payload: ingredient
+})

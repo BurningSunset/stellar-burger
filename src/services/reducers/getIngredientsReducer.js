@@ -1,11 +1,17 @@
-import { GET_INGREDIENTS_REQUEST,
+import {
+    GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
-    GET_INGREDIENTS_FAILURE } from '../actions/getIngredients'
+    GET_INGREDIENTS_FAILURE,
+
+    INCREASE_COUNTER,
+    DECREASE_COUNTER,
+    CLEAR_COUNTER
+} from '../actions/getIngredients'
 
 const initialState = {
     ingredients: [],
     ingredientsRequest: false,
-    ingredientsError: null
+    ingredientsError: null,
 }
 
 export const getIngredientsReducer = (state = initialState, action) => {
@@ -32,6 +38,42 @@ export const getIngredientsReducer = (state = initialState, action) => {
                 ingredientsError: action.error
             }
         }
+
+        case INCREASE_COUNTER: {
+            const updatedState = { ...state };
+            const currentIngredient = state.ingredients.find((item) => item._id === action.payload._id);
+        
+            if (currentIngredient.type === 'bun') {
+                updatedState.ingredients.forEach((item) => {
+                    if (item.type === 'bun') {
+                        item.counter = 0;
+                    }
+                });
+                currentIngredient.counter = +currentIngredient.counter + 2;
+            } else {
+                currentIngredient.counter = +currentIngredient.counter + 1;
+            }
+            return { ...updatedState };
+        }
+        
+        // Проверка на 
+        case DECREASE_COUNTER: {
+            return {
+                ...state,
+                ingredients: state.ingredients.map((item) => {
+                    if (item._id === action.payload) {
+                        return {
+                            ...item,
+                            counter: Math.max(0, item.counter - 1), // Гарантируем, что счетчик не будет уходить в отрицательные значения
+                        };
+                    } else {
+                        // Возвращаем неизмененный элемент
+                        return item;
+                    }
+                }),
+            };
+        }
+        
         default: {
             return state
         }
