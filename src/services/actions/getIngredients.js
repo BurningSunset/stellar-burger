@@ -7,6 +7,7 @@ export const GET_INGREDIENTS_FAILURE = 'GET_INGREDIENTS_FAILURE'
 export const INCREASE_COUNTER = 'INCREASE_COUNTER'
 export const DECREASE_COUNTER = 'DECREASE_COUNTER'
 
+
 export function getIngredients() {
     return function(dispatch) {
         dispatch({

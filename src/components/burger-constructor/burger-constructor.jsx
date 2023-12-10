@@ -3,14 +3,13 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid';
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes';
 import { ADD_ITEM, DELETE_ITEM, SET_BUN } from '../../services/actions/currentConstructorIngredients'
-import { useDispatch } from 'react-redux';
 import { decreaseCounter } from '../../services/actions/getIngredients'
-import { useState } from 'react';
+import { submitOrder } from '../../services/actions/createOrder'
 
 const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
@@ -59,6 +58,12 @@ const BurgerConstructor = ({ showModal }) => {
         })
       }
 
+      const clickHandler = () => {
+        dispatch(
+            submitOrder(ingredientList)
+          )
+      }
+
     return (
         <section className={`pt-25 ${styles.section} ml-4 mr-4`}>
             <div ref={drop} className={`${styles.block}`}>
@@ -101,7 +106,7 @@ const BurgerConstructor = ({ showModal }) => {
                     <span className={`${styles.itemPrice} mr-10`}>
                         <p className="text text_type_digits-medium mr-1 mb-2">{totalCost}<CurrencyIcon type="primary" /></p>
                     </span>
-                    <Button onClick={showModal} htmlType="button" type="primary" size="large">
+                    <Button onClick={clickHandler} htmlType="button" type="primary" size="large">
                         Оформить заказ
                     </Button>
                 </>
