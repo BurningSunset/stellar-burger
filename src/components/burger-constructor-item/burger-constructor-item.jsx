@@ -1,10 +1,36 @@
 import styles from './burger-constructor-item.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
+import { swapItems } from '../../services/actions/currentConstructorIngredients'
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useDrag, useDrop } from 'react-dnd';
 
-const BurgerConstructorItem = ({item, isLocked, extraClass, type, handleClose}) => {
+const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClose}) => {
+
+    const ref = useRef(null)
+    const dispatch = useDispatch()
+
+    const [, drag] = useDrag({
+        type: "sort",
+        item: {uid}
+    })
+
+    const [, drop] = useDrop({
+        accept: "sort",
+        drop(item) {
+            if (uid !== item.uid) {
+                dispatch(
+                    swapItems(uid, item.uid)
+                )
+            }
+        }
+    })
+
+    drag(drop(ref))
+
     return (
-        <div className={styles.itemBlock}>
+        <div className={styles.itemBlock} ref={ref}>
             {isLocked !== true &&
                 <DragIcon type="primary" />
             }
