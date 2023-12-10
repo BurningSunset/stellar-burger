@@ -14,7 +14,14 @@ import { useState } from 'react';
 
 const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
-    const [currentBun, setCurrentBun ] = useState(null)
+
+    let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
+    let totalCost = 0
+
+    if (ingredientList.length !== 0 ) {
+        totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.price, 0);
+        totalCost += bun.price * 2
+    }
     const [{ canDrop }, drop] = useDrop(() => ({
         accept: ItemTypes.INGREDIENT,
         drop (ingredient) {
@@ -89,13 +96,20 @@ const BurgerConstructor = ({ showModal }) => {
                 />}
             </div>
             <div className={`${styles.purchase} mt-10 mr-10 mb-5`}>
+            {totalCost !== 0 ? (
+                <>
+                    <span className={`${styles.itemPrice} mr-10`}>
+                        <p className="text text_type_digits-medium mr-1 mb-2">{totalCost}<CurrencyIcon type="primary" /></p>
+                    </span>
+                    <Button onClick={showModal} htmlType="button" type="primary" size="large">
+                        Оформить заказ
+                    </Button>
+                </>
+                ) : (
                 <span className={`${styles.itemPrice} mr-10`}>
-                    <p className="text text_type_digits-medium mr-1 mb-2">{1000}
-                    <CurrencyIcon type="primary" /></p>
+                    <p className="text text_type_main-small">{costPlaceholder}</p>
                 </span>
-                <Button onClick={showModal} htmlType="button" type="primary" size="large">
-                    Оформить заказ
-                </Button>
+                )}
             </div>
         </section>
     )

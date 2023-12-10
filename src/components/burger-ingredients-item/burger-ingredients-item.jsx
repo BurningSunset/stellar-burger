@@ -34,7 +34,6 @@ const BurgerIngredientsItem = ({item, onClick, showModal}) => {
         }),
     }))
     const opacity = isDragging ? 0.4 : 1
-    // dispatch(incrementCounter(item.id));
 
     return (
         <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }} onClick={handleClick}>
