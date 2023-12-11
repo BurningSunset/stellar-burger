@@ -24,7 +24,6 @@ function App() {
 
   const [isOrderModalVisible, setOrderModalVisible] = useState(false);
   const [isIngredientModalVisible, setIngredientModalVisible] = useState(false);
-  const [modalIngredientData, setModalIngredientData] = useState({});
 
   const showOrderModal = () => {
     setOrderModalVisible(true);
@@ -42,9 +41,6 @@ function App() {
     setIngredientModalVisible(false);
   };
 
-  const handleIngredientClick = (ingredientId) => {
-    setModalIngredientData(ingredientId);
-  };
 
   return (
     <div className={styles.app}>
@@ -63,7 +59,6 @@ function App() {
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients
             showModal={showIngredientModal}
-            onIngredientClick={handleIngredientClick}
           />
           <BurgerConstructor showModal={showOrderModal} />
         </DndProvider>

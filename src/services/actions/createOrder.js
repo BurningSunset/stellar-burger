@@ -1,4 +1,5 @@
 import { URL } from "../../utils/apiConst"
+import { checkResponse } from "../../utils/checkResponse"
 
 
 export const ORDER_SUBMIT = 'ORDER_SUBMIT'
@@ -15,14 +16,9 @@ export const submitOrder = (ingredients) => {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({ ingredients: ingredients.map(item => item._id) })
-        }).then(response => {
-            console.log(response)
-            if (!response.ok) {
-                return Promise.reject(`Error (submitOrder action): ${response.status}`);
-            } else {
-                return response.json()
-            }
-        }).then(response => {
+        })
+        .then(checkResponse)
+        .then(response => {
             dispatch({
                 type: ORDER_SUCCESS,
                 order: response
@@ -37,7 +33,6 @@ export const submitOrder = (ingredients) => {
 }
 
 export const clearOrder = () => {
-    console.log('dismount')
     return {
         type: CLEAR_ORDER
     }

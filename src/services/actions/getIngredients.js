@@ -1,4 +1,5 @@
 import { URL } from '../../utils/apiConst'
+import { checkResponse } from '../../utils/checkResponse'
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST'
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS'
@@ -15,13 +16,9 @@ export function getIngredients() {
         })
         fetch(`${URL}/ingredients`, {
             method: 'GET'
-        }).then(response => {
-            if (!response.ok) {
-                return Promise.reject(`Error (getIngredients action): ${response.status}`);
-            } else {
-                return response.json()
-            }
-        }).then(response => {
+        })
+        .then(checkResponse)
+        .then(response => {
             const ingredientList = response.data.map((item) => ({...item, counter: 0}))
             dispatch({
                 type: GET_INGREDIENTS_SUCCESS,

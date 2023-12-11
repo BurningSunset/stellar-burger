@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 
-function BurgerIngredients({showModal, onIngredientClick}) {
+function BurgerIngredients({showModal}) {
 
     const { currentTab } = useSelector(state => state.switchTab)
 
@@ -68,8 +68,7 @@ function BurgerIngredients({showModal, onIngredientClick}) {
 }
 
 BurgerIngredients.propTypes = {
-    showModal: PropTypes.func.isRequired,
-    onIngredientClick: PropTypes.func.isRequired, 
+    showModal: PropTypes.func.isRequired
 }
 
 export default BurgerIngredients
