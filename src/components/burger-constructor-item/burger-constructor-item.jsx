@@ -41,7 +41,7 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
                     /> ) : (
                     <ConstructorElement
                         extraClass={extraClass ? `${extraClass} ml-2 ${styles.spanOnMiddle}` : `ml-2 ${styles.spanOnMiddle}`}
-                        text={item.name}
+                        text={type === 'top' ? `${item.name} (верх)` : type === 'bottom' ? `${item.name} (низ)` : item.name}
                         price={item.price}
                         thumbnail={item.image}
                         type={type}
