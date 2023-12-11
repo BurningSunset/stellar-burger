@@ -1,4 +1,5 @@
-import { urlPost } from "../../utils/api"
+import { URL } from "../../utils/apiConst"
+
 
 export const ORDER_SUBMIT = 'ORDER_SUBMIT'
 export const ORDER_SUCCESS = 'ORDER_SUCCESS'
@@ -8,7 +9,7 @@ export const CLEAR_ORDER = 'CLEAR_ORDER'
 
 export const submitOrder = (ingredients) => {
     return function(dispatch) {
-        fetch(urlPost, {
+        fetch(`${URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

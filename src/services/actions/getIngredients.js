@@ -1,4 +1,4 @@
-import { url } from '../../utils/api'
+import { URL } from '../../utils/apiConst'
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST'
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS'
@@ -13,7 +13,7 @@ export function getIngredients() {
         dispatch({
             type: GET_INGREDIENTS_REQUEST
         })
-        fetch(url, {
+        fetch(`${URL}/ingredients`, {
             method: 'GET'
         }).then(response => {
             if (!response.ok) {
