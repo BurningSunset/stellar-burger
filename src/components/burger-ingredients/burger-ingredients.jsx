@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 
+import debounce from 'lodash/debounce';// для корректной работы прокрута табов
+
 function BurgerIngredients({showModal}) {
 
     const { currentTab } = useSelector(state => state.switchTab)
@@ -21,21 +23,20 @@ function BurgerIngredients({showModal}) {
         const bunRect = bunRef.current?.getBoundingClientRect();
         const sauceRect = sauceRef.current?.getBoundingClientRect();
         const mainRect = mainRef.current?.getBoundingClientRect();
-        const blockRect = ingredientBlockRef.current?.getBoundingClientRect();
-
-        if (blockRect && bunRect && sauceRect && mainRect) {
-            const blockTop = blockRect.top;
-            const blockBottom = blockRect.bottom;
     
-            if (bunRect.top >= blockTop && bunRect.bottom <= blockBottom) {
-                tabSwitcher('bun');
-            } else if (sauceRect.top >= blockTop && sauceRect.bottom <= blockBottom) {
-                tabSwitcher('sauce');
-            } else if (mainRect.top >= blockTop && mainRect.bottom <= blockBottom) {
-                tabSwitcher('main');
-            }
+        const blockTop = ingredientBlockRef.current?.getBoundingClientRect()?.top || 0;
+    
+        if (blockTop >= bunRect.top && blockTop < sauceRect.top) {
+            tabSwitcher('bun');
+        } else if (blockTop >= sauceRect.top && blockTop < mainRect.top) {
+            tabSwitcher('sauce');
+        } else if (blockTop >= mainRect.top) {
+            tabSwitcher('main');
         }
-    };
+    }
+    
+    const debouncedCategoryScroll = debounce(categoryScroll, 100)
+
 
     const tabClickHandler = (ref, tab) => {
         ref.current.scrollIntoView({
