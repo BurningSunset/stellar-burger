@@ -9,6 +9,7 @@ import { useDrag, useDrop } from 'react-dnd';
 const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClose}) => {
     const ref = useRef(null)
     const dispatch = useDispatch()
+
     const [, drag] = useDrag({
         type: "sort",
         item: {uid}
@@ -24,7 +25,6 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
         }
     })
     drag(drop(ref))
-
     return (
         <div className={styles.itemBlock} ref={ref}>
             {isLocked !== true &&

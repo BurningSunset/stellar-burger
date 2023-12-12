@@ -4,12 +4,11 @@ import BurgerConstructorItem from '../burger-constructor-item/burger-constructor
 import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid';
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes';
-import { ADD_ITEM, DELETE_ITEM, SET_BUN } from '../../services/actions/currentConstructorIngredients'
 import { decreaseCounter } from '../../services/actions/getIngredients'
 import { submitOrder } from '../../services/actions/createOrder'
+import { addIngredient, setBun, deleteIngredient } from '../../services/actions/currentConstructorIngredients';
 
 const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
@@ -33,28 +32,18 @@ const BurgerConstructor = ({ showModal }) => {
 
       const acceptIngredient = (item) => {
         const ingredient = {
-            ...item.item,
-            uid: uuidv4(),
+            ...item.item
         }
         if (ingredient.type === 'bun') {
-            dispatch({
-                type: SET_BUN,
-                item: ingredient
-            })
+            dispatch(setBun(ingredient))
         } else if (ingredient.type !== 'bun') {
-            dispatch({
-                type: ADD_ITEM,
-                item: ingredient
-            })
+            dispatch(addIngredient(ingredient))
         }
       }
 
       const handleClose = (ingredient) => {
         dispatch(decreaseCounter(ingredient.item._id))
-        dispatch({
-            type: DELETE_ITEM,
-            uid: ingredient.item.uid
-        })
+        dispatch(deleteIngredient(ingredient))
       }
 
       const clickHandler = () => {
@@ -81,13 +70,14 @@ const BurgerConstructor = ({ showModal }) => {
                     isLocked
                 />}
                 <div className={`mt-4 mb-4 ${styles.ingredientBlock}`}>
-                    {(ingredientList.length > 0) && ingredientList?.map((item, index) => (
+                    {(ingredientList.length > 0) && ingredientList?.map((item) => (
                     <BurgerConstructorItem
+                        key={item.uid}
                         uid={item.uid}
-                        key={index}
                         item={item}
                         handleClose={handleClose}
                     />
+
                 ))}
                 </div>
                 {bun && <BurgerConstructorItem
