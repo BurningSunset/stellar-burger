@@ -1,7 +1,4 @@
 import styles from './ingredient-details.module.css'
-import { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import ingredientType from '../../utils/PropTypes'
 import { useSelector } from 'react-redux'
 
 const IngredientDetails = () => {
@@ -39,16 +36,5 @@ const IngredientDetails = () => {
         </div>
     )
 }
-
-// IngredientDetails.propTypes = {
-//     data: PropTypes.arrayOf(ingredientType).isRequired,
-//     // указал второй тип object, потому что при инициализации
-//     // у нас пропс id - пустой объект
-//     // потом становится string
-//     id: PropTypes.oneOfType([
-//         PropTypes.string,
-//         PropTypes.object,
-//       ]).isRequired
-// }
 
 export default IngredientDetails

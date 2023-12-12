@@ -1,9 +1,10 @@
 import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
+import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { incrementCounter } from '../../services/actions/getIngredients'
 import { setCurrentIngredient } from '../../services/actions/currentIngredient'
 
@@ -51,18 +52,8 @@ const BurgerIngredientsItem = ({item, showModal}) => {
     )
 }
 
-// BurgerIngredientsItem.propTypes = {
-//     onClick: PropTypes.func.isRequired,
-//     id: PropTypes.string.isRequired,
-//     showModal: PropTypes.func.isRequired,
-//     counterValue: PropTypes.number.isRequired,
-//     ingImage: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     name: PropTypes.string.isRequired,
-// }
+BurgerIngredientsItem.propTypes = {
+    item: ingredientType.isRequired,
+    showModal: PropTypes.func.isRequired,
+}
 export default BurgerIngredientsItem
-
-// item при клике делает переменную состояния равной своему _id
-// IngredientDetails получает _id и ищет элемент в переданном массиве с данными
-// Обрабатывает
-// Сразу после этого вызывается модалка с этим IngredientDetails

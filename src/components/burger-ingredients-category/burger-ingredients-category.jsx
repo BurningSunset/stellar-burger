@@ -1,6 +1,5 @@
 import styles from './burger-ingredients-category.module.css'
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
-import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux';
 import { forwardRef } from 'react';

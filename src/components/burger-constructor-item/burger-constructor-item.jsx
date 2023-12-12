@@ -1,5 +1,6 @@
 import styles from './burger-constructor-item.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { swapItems } from '../../services/actions/currentConstructorIngredients'
 import { useRef } from 'react';
@@ -54,13 +55,13 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
     )
 }
 
-// BurgerConstructorItem.propTypes = {
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     image: PropTypes.string.isRequired,
-//     type: PropTypes.string,
-//     isLocked: PropTypes.bool,
-//     extraClass: PropTypes.string
-// }
+BurgerConstructorItem.propTypes = {
+    item: ingredientType,
+    uid: PropTypes.string,
+    type: PropTypes.string,
+    isLocked: PropTypes.bool,
+    extraClass: PropTypes.string,
+    handleClose: PropTypes.func
+}
 
 export default BurgerConstructorItem

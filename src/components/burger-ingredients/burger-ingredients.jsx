@@ -1,13 +1,10 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-import ingredientType from '../../utils/PropTypes'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
-
-import debounce from 'lodash/debounce';// для корректной работы прокрута табов
 
 function BurgerIngredients({showModal}) {
 
@@ -34,9 +31,6 @@ function BurgerIngredients({showModal}) {
             tabSwitcher('main');
         }
     }
-    
-    const debouncedCategoryScroll = debounce(categoryScroll, 100)
-
 
     const tabClickHandler = (ref, tab) => {
         ref.current.scrollIntoView({

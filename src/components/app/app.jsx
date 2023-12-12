@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import { constructorList } from "../../utils/data.js";
 import styles from "./app.module.css";
-import useApi from "../../hooks/useApi";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getIngredients } from "../../services/actions/getIngredients";
 
 import { DndProvider } from "react-dnd";

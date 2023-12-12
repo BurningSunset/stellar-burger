@@ -1,9 +1,6 @@
 import styles from './order-details.module.css'
 import succesIcon from '../../images/graphics.svg'
-import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { clearOrder } from '../../services/actions/createOrder'
+import { useSelector } from 'react-redux'
 
 const OrderDetails = () => {
     const { order } = useSelector((state) => state.createOrder)
