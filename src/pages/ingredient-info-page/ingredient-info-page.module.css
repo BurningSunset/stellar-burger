@@ -1,0 +1,38 @@
+.ingredientContainer {
+    width: 520px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ingredientImage {
+    height: 240px;
+}
+.ingredientParamList {
+    display: flex;
+}
+.ingredientParam {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+p {
+    margin: 0;
+    font-size: 18px;
+}
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid rgba(51, 51, 255, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

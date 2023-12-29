@@ -1,32 +1,22 @@
-import styles from './ingredient-details.module.css'
+import styles from './ingredient-info-page.module.css'
+import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
-import { getIngredients } from '../../services/actions/getIngredients';
-import { useEffect } from 'react';
-const IngredientDetails = () => {
+import { useParams } from 'react-router-dom'
+import { getIngredients } from '../../services/actions/getIngredients'
+
+const IngredientInfoPage = () => {
+    const { ingredientId } = useParams()
     const dispatch = useDispatch();
-
-    let currentIngredient = useSelector((state) => state.currentIngredient.ingredient);
-    let ingredients = useSelector((state) => state.getIngredients.ingredients)
-    const {ingredientId} = useParams()
-
-    // срабатывает, если в сторе нет ингредиентов (например, 
-    // когда мы не нажали f5 на странице с модалкой, )
     useEffect(() => {
-        if (!ingredients || ingredients.length === 0) {
-          dispatch(getIngredients());
-        }
-      }, [dispatch, ingredients]);
-
-    // срабатывает, если страница открыта не через модалку
-    if (!currentIngredient) {
-        currentIngredient = ingredients.find(ingredient => ingredient._id === ingredientId);
-    }
+      dispatch(getIngredients());
+    }, [ingredientId]);
+    const { ingredients } = useSelector(state => state.getIngredients)
+    const currentIngredient = useMemo(() => ingredients.find(ingredient => ingredient._id === ingredientId))
 
     return (
         <div className={styles.ingredientContainer}>
-            {currentIngredient ? (
-                <>
+            {currentIngredient ? 
+            <>
                     <img className={styles.ingredientImage} src={currentIngredient.image} alt={currentIngredient.name}></img>
                     <p className="text text_type_main-medium mb-8 mt-4">{currentIngredient.name}</p>
                     <div className={`text text_type_main-default text_color_inactive ${styles.ingredientParamList}`}>
@@ -48,11 +38,9 @@ const IngredientDetails = () => {
                         </div>
                     </div>
                 </>
-            ) : (
-                <></>
-            )}
+         : <div className={styles.loader}></div>}
         </div>
     )
 }
 
-export default IngredientDetails
+export default IngredientInfoPage

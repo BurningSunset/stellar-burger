@@ -111,8 +111,8 @@ const BurgerConstructor = ({ showModal }) => {
     )
 }
 
-BurgerConstructor.propTypes = {
-    showModal: PropTypes.func.isRequired
-}
+// BurgerConstructor.propTypes = {
+//     showModal: PropTypes.func.isRequired
+// }
 
 export default BurgerConstructor

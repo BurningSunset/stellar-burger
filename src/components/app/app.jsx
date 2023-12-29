@@ -1,66 +1,44 @@
-import { useEffect, useState } from "react";
 import AppHeader from "../app-header/app-header";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import styles from "./app.module.css";
 import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
+
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import Home from "../../pages/home/home";
 
-import { useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions/getIngredients";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
 
-  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const background = location.state && location.state.background;
+
   useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
-
-  const [isOrderModalVisible, setOrderModalVisible] = useState(false);
-  const [isIngredientModalVisible, setIngredientModalVisible] = useState(false);
-
-  const showOrderModal = () => {
-    setOrderModalVisible(true);
-  };
-
-  const closeOrderModal = () => {
-    setOrderModalVisible(false);
-  };
-
-  const showIngredientModal = () => {
-    setIngredientModalVisible(true);
-  };
-
-  const closeIngredientModal = () => {
-    setIngredientModalVisible(false);
-  };
-
+    navigate()
+  },[])
 
   return (
     <div className={styles.app}>
-      <Modal
-        title="Детали ингредиента"
-        isOverlayVisible={isIngredientModalVisible}
-        onHide={closeIngredientModal}
-      >
-        <IngredientDetails />
-      </Modal>
-      <Modal isOverlayVisible={isOrderModalVisible} onHide={closeOrderModal}>
-        <OrderDetails />
-      </Modal>
       <AppHeader />
-      <main className={styles.mainDiv}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients
-            showModal={showIngredientModal}
-          />
-          <BurgerConstructor showModal={showOrderModal} />
-        </DndProvider>
-      </main>
+        <Routes location={background || location}>
+          <Route path='/' element={<Home />}/>
+          <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
+        </Routes>
+
+        {background && (
+          <Routes>
+            <Route 
+              path='/ingredients/:ingredientId' 
+              element={
+                <Modal>
+                  <IngredientDetails />
+                </Modal>
+              }
+            />
+          </Routes>
+        )}
     </div>
   );
 }

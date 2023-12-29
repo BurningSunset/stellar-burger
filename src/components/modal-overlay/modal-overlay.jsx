@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 const ModalOverlay = ({ children, isVisible, onHide }) => {
     const overlayClassName = `${isVisible ? styles.visible : styles.hidden}`
     const overlayClickHandler = (e) => {
-        if (e.target === e.currentTarget) {
+        if (e.target === e.currentTarget ) {
             onHide()
         }
     }
     const escClickHandler = (e) => {
         if (e.key === 'Escape') {
-            onHide()
+            onHide && onHide()
         }
     }
     useEffect(() => {
@@ -25,9 +25,9 @@ const ModalOverlay = ({ children, isVisible, onHide }) => {
         </div>
     )
 }
-ModalOverlay.propTypes = {
-    children: PropTypes.node.isRequired,
-    isVisible: PropTypes.bool.isRequired,
-    onHide: PropTypes.func.isRequired
-}
+// ModalOverlay.propTypes = {
+//     children: PropTypes.node.isRequired,
+//     isVisible: PropTypes.bool.isRequired,
+//     onHide: PropTypes.func.isRequired
+// }
 export default ModalOverlay

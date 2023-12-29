@@ -24,9 +24,9 @@ const BurgerIngredientsCategory = forwardRef(({type, categoryHeading, showModal}
 }
 )
 
-BurgerIngredientsCategory.propTypes = {
-    type: PropTypes.string.isRequired,
-    categoryHeading: PropTypes.string.isRequired,
-    showModal: PropTypes.func.isRequired,
-}
+// BurgerIngredientsCategory.propTypes = {
+//     type: PropTypes.string.isRequired,
+//     categoryHeading: PropTypes.string.isRequired,
+//     showModal: PropTypes.func.isRequired,
+// }
 export default BurgerIngredientsCategory

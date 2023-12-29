@@ -62,8 +62,8 @@ function BurgerIngredients({showModal}) {
     )
 }
 
-BurgerIngredients.propTypes = {
-    showModal: PropTypes.func.isRequired
-}
+// BurgerIngredients.propTypes = {
+//     showModal: PropTypes.func.isRequired
+// }
 
 export default BurgerIngredients
