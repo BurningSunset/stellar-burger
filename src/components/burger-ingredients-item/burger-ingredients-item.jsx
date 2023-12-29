@@ -49,7 +49,7 @@ const BurgerIngredientsItem = ({item, showModal}) => {
             state={{ background: location }}
             className={styles.link}
         >
-            <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }} onClick={handleClick}>
+            <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }}>
                 <div className={`${styles.counter} `}>
                     {item.counter !== 0 && <Counter count={item.counter}/> }
                 </div>

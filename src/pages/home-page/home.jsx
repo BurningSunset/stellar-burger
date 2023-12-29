@@ -29,15 +29,6 @@ const Home = () => {
     setOrderModalVisible(false);
   };
 
-  const showIngredientModal = () => {
-    setIngredientModalVisible(true);
-  };
-
-  const closeIngredientModal = () => {
-    navigate(-1);
-    setIngredientModalVisible(false);
-  };
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
@@ -46,21 +37,12 @@ const Home = () => {
   return (
     <div className={styles.home}>
         <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients
-            showModal={showIngredientModal}
-          />
-          <BurgerConstructor showModal={showOrderModal} />
+          <BurgerIngredients />
+          <BurgerConstructor showModal={showOrderModal} onHide={closeOrderModal} />
         </DndProvider>
-        <Modal
-          title="Детали ингредиента"
-          isOverlayVisible={isIngredientModalVisible}
-          onHide={closeIngredientModal}
-        >
-          <IngredientDetails />
-        </Modal>
-        <Modal isOverlayVisible={isOrderModalVisible} onHide={closeOrderModal}>
+        {/* <Modal isOverlayVisible={isOrderModalVisible} onHide={closeOrderModal}>
           <OrderDetails />
-        </Modal>
+        </Modal> */}
     </div>
   );
 }
