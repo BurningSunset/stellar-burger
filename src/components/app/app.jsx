@@ -10,10 +10,17 @@ import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password
 
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RegistrerPage from "../../pages/register-page/register";
-
+import RegisterPage from "../../pages/register-page/register";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
+import { checkUserAuth } from "../../utils/api";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserAuth());
+  }, []);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,9 +35,9 @@ function App() {
       <AppHeader />
         <Routes location={background || location}>
           <Route path='/' element={<Home />}/>
-          <Route path='/login' element={<LoginPage />}/>
-          <Route path='/register' element={<RegistrerPage />}/>
-          <Route path='/reset-password' element={<ResetPasswordPage />} />
+          <Route path='/login' element={<OnlyUnAuth component={<LoginPage />} />}/>
+          <Route path='/register' element={<OnlyUnAuth component={<RegisterPage />} />}/>
+          <Route path='/reset-password' element={<OnlyAuth component={<ResetPasswordPage />} />} />
           <Route path='/forgot-password' element={<ForgotPasswordPage />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
         </Routes>
