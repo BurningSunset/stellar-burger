@@ -13,7 +13,7 @@ const BurgerConstructor = ({ showModal }) => {
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
     let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
     let totalCost = 0
-
+    const {user} = useSelector((store) => store.user)
     if (bun && ingredientList.length !== 0 ) {
         totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.price, 0);
         totalCost += bun.price * 2
@@ -47,11 +47,15 @@ const BurgerConstructor = ({ showModal }) => {
 
       const clickHandler = () => {
         // соединяем булочки и другие ингредиенты
-        let fullIngredientList = [bun, ...ingredientList, bun]
-        dispatch(
-            submitOrder(fullIngredientList)
-          )
-          showModal()
+        if (user) {
+            let fullIngredientList = [bun, ...ingredientList, bun]
+            dispatch(
+                submitOrder(fullIngredientList)
+              )
+              showModal()
+        } else {
+            alert('Нужно залогиниться')
+        }
       }
 
     return (
@@ -111,8 +115,8 @@ const BurgerConstructor = ({ showModal }) => {
     )
 }
 
-// BurgerConstructor.propTypes = {
-//     showModal: PropTypes.func.isRequired
-// }
+BurgerConstructor.propTypes = {
+    showModal: PropTypes.func.isRequired
+}
 
 export default BurgerConstructor

@@ -24,9 +24,8 @@ const ModalOverlay = ({ children, onHide }) => {
         </div>
     )
 }
-// ModalOverlay.propTypes = {
-//     children: PropTypes.node.isRequired,
-//     isVisible: PropTypes.bool.isRequired,
-//     onHide: PropTypes.func.isRequired
-// }
+ModalOverlay.propTypes = {
+    children: PropTypes.node.isRequired,
+    onHide: PropTypes.func.isRequired
+}
 export default ModalOverlay

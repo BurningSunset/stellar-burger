@@ -14,6 +14,9 @@
 .active {
     color: #f2f2f3
 }
+.inactive {
+    color: rgb(133,133,173)
+}
 .nav {
     position: relative;
     display: flex;

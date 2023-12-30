@@ -14,6 +14,9 @@ import RegisterPage from "../../pages/register-page/register";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../utils/api";
 import { useDispatch } from "react-redux";
+import ProfilePage from "../../pages/profile-page/profile";
+import OrderPage from "../../pages/order-page/order";
+import OrderDetails from "../order-details/order-details";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,15 +33,27 @@ function App() {
     navigate(-1);
   }
 
+  const [isOrderModalVisible, setOrderModalVisible] = useState(false);
+
+  const showOrderModal = () => {
+    setOrderModalVisible(true);
+  };
+
+  const closeOrderModal = () => {
+    setOrderModalVisible(false);
+  };
+
   return (
     <div className={styles.app}>
       <AppHeader />
         <Routes location={background || location}>
-          <Route path='/' element={<Home />}/>
+          <Route path='/' element={<Home showOrderModal={showOrderModal}/>}/>
           <Route path='/login' element={<OnlyUnAuth component={<LoginPage />} />}/>
           <Route path='/register' element={<OnlyUnAuth component={<RegisterPage />} />}/>
-          <Route path='/reset-password' element={<OnlyAuth component={<ResetPasswordPage />} />} />
-          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+          <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
+          <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
+          <Route path='/profile' element={<OnlyAuth component={<ProfilePage />} />} />
+          <Route path='/order' element={<OnlyAuth component={<OrderPage />} />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
         </Routes>
 
@@ -56,6 +71,11 @@ function App() {
             />
           </Routes>
         )}
+        {isOrderModalVisible && 
+          <Modal onHide={closeOrderModal}>
+            <OrderDetails />
+          </Modal>
+        }
     </div>
   );
 }

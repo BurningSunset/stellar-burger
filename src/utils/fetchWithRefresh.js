@@ -1,5 +1,8 @@
 import { URL } from "./apiConst";
-import { checkResponse } from "./checkResponse";
+// import { checkResponse } from "./checkResponse";
+const checkResponse = (res) => {
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+};
 
   export const refreshToken = () => {
     return fetch(`${URL}/auth/token`, {

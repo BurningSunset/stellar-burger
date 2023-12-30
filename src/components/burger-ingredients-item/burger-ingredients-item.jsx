@@ -1,27 +1,17 @@
 import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientType from '../../utils/PropTypes'
-import PropTypes from 'prop-types'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
 import { useDispatch } from 'react-redux'
 import { incrementCounter } from '../../services/actions/getIngredients'
-import { setCurrentIngredient } from '../../services/actions/currentIngredient'
 import { useLocation, Link } from "react-router-dom";
 
-const BurgerIngredientsItem = ({item, showModal}) => {
+const BurgerIngredientsItem = ({item}) => {
     
     const location = useLocation();
     const ingredientId = item['_id'];
-
-
     const dispatch = useDispatch()
-
-    const handleClick = () => {
-        dispatch(setCurrentIngredient(item))
-        showModal()
-    }
-
     const handleDrop = () => {
         dispatch(incrementCounter(item))
     }
@@ -64,8 +54,7 @@ const BurgerIngredientsItem = ({item, showModal}) => {
     )
 }
 
-// BurgerIngredientsItem.propTypes = {
-//     item: ingredientType.isRequired,
-//     showModal: PropTypes.func.isRequired,
-// }
+BurgerIngredientsItem.propTypes = {
+    item: ingredientType.isRequired,
+}
 export default BurgerIngredientsItem

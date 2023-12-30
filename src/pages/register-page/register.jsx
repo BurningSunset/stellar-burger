@@ -3,9 +3,10 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { registerAsync } from '../../utils/api'
-
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const RegistrationPage = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const initialState = {
         name: '',
@@ -22,6 +23,7 @@ const RegistrationPage = () => {
             e.preventDefault()
             dispatch(registerAsync(values))
             setValues(initialState)
+            navigate('/'); 
         }
     return (
         <form className={`${styles.register}`} onSubmit={onSubmit}> 
@@ -58,7 +60,11 @@ const RegistrationPage = () => {
             >
                 Зарегистрироваться
             </Button>
-            <p className="text text_type_main-default text_color_inactive mb-6">Уже зарегистрированы? <a className={styles.a} href=''>Войти</a></p>
+            <p className="text text_type_main-default text_color_inactive mb-6">Уже зарегистрированы? 
+                <Link className={styles.a} to={'/login'}>
+                    Войти
+                </Link>
+            </p>
         </form>
     )
 }

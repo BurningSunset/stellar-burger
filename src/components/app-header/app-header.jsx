@@ -1,30 +1,58 @@
-import { Logo, BurgerIcon, ListIcon, ProfileIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './app-header.module.css'
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 function AppHeader() {
+
+    const location = useLocation()
+
+    const [activeLink, setActiveLink] = useState(null);
+
+    useEffect(() => {
+      // Дополнительная проверка для страниц /login, /register, /reset-password, /forgot-password
+      if (
+        location.pathname === '/login' || location.pathname === '/register' || 
+        location.pathname === '/reset-password'|| location.pathname === '/forgot-password'
+        ) {
+        setActiveLink('/profile');
+      } else {
+        setActiveLink(location.pathname);
+      }
+    }, [location.pathname]);
+
+    const getLinkClass = (path) => `${styles.a} ${activeLink === path ? styles.active : styles.inactive}`
+    const getIconType = (path) => activeLink === path ? 'primary' : 'secondary';
+
     return (
         <header className={`pb-4 pt-4 ${styles.header}`}>
             <nav className={`${styles.nav}`}>
                 <ul className={`${styles.ul}`}>
                     <li className={`mr-2 pr-5 pl-5 pt-4 pb-4`}>
-                        <a className={styles.a} href='/'>
-                            <BurgerIcon type="primary"/>
-                            <p className={`ml-2 text text_type_main-default ${styles.active}`}>Конструктор</p>
-                        </a>
+                        <Link 
+                            className={getLinkClass('/')} 
+                            to={`/`}
+                        >
+                            <BurgerIcon type={getIconType('/')}/>
+                            <p className={`ml-2 text text_type_main-default`}>Конструктор</p>
+                        </Link>
                     </li>
                     <li className={`pl-5 pr-5 pt-4 pb-4`}>
-                        <a className={styles.a} href='/'>
-                            <ListIcon type="secondary" />
-                            <p className='ml-2 text text_type_main-default text_color_inactive'>Лента заказов</p>
-                        </a>
+                        <Link 
+                            className={getLinkClass('/order')} 
+                            to={`/order`}
+                        >
+                            <ListIcon type={getIconType('/order')}/>
+                            <p className='ml-2 text text_type_main-default'>Лента заказов</p>
+                        </Link>
                     </li>
                 </ul>
-                <a href='/' className={`${styles.logo} ${styles.a}`}>
+                <Link to={`/`} className={`${styles.logo} ${styles.a}`}>
                     <Logo />
-                </a>
-                <a className={`pl-5 pr-5 pt-4 pb-4 ${styles.a}`} href='/'>
-                    <ProfileIcon type="secondary" />
-                    <p className='m-2 text text_type_main-default text_color_inactive'>Личный кабинет</p>
-                </a>
+                </Link>
+                <Link className={`pl-5 pr-5 pt-4 pb-4 ${getLinkClass('/profile')}`} to={`/profile`}>
+                    <ProfileIcon type={getIconType('/profile')} />
+                    <p className='m-2 text text_type_main-default'>Личный кабинет</p>
+                </Link>
             </nav>
         </header>
     )

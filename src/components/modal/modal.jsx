@@ -22,10 +22,9 @@ const Modal = ({children, title, onHide}) => {
         modalRoot
     )
 }
-// Modal.propTypes = {
-//     children: PropTypes.node.isRequired,
-//     title: PropTypes.string,
-//     isOverlayVisible: PropTypes.bool.isRequired,
-//     onHide: PropTypes.func.isRequired
-// }
+Modal.propTypes = {
+    children: PropTypes.node.isRequired,
+    title: PropTypes.string,
+    onHide: PropTypes.func.isRequired
+}
 export default Modal

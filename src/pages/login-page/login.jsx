@@ -3,10 +3,11 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import { loginAsync } from '../../utils/api'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     const initialState = {
         email: '',
         password: ''
@@ -17,11 +18,11 @@ const LoginPage = () => {
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = e => {
-            e.preventDefault()
-            dispatch(loginAsync(values))
+        const onSubmit = async (e) => {
+            e.preventDefault();
+            await dispatch(loginAsync(values));
+            navigate('/'); 
         }
-
     return (
         <form className={`${styles.login}`} onSubmit={onSubmit}> 
             <h2 className={`mb-6`}>
@@ -49,8 +50,16 @@ const LoginPage = () => {
             >
                 Войти
             </Button>
-            <p className="text text_type_main-default text_color_inactive mb-6">Вы - новый пользователь? <a className={styles.a} href=''>Зарегистрироваться</a></p>
-            <p className="text text_type_main-default text_color_inactive">Забыли пароль? <a className={styles.a} href=''>Восстановить пароль</a></p>
+            <p className="text text_type_main-default text_color_inactive mb-6">Вы - новый пользователь? 
+                <Link className={styles.a} to={'/register'}>
+                    Зарегистрироваться
+                </Link>
+            </p>
+            <p className="text text_type_main-default text_color_inactive">Забыли пароль? 
+                <Link className={styles.a} to={'/forgot-password'}>
+                    Восстановить пароль
+                </Link>
+            </p>
         </form>
     )
 }
