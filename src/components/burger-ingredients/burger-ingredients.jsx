@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 

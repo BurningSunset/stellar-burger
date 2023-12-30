@@ -9,7 +9,7 @@ import { getIngredients } from "../../services/actions/getIngredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { PropTypes } from "react";
+import { PropTypes } from "prop-types";
 
 const Home = ({showOrderModal}) => {
 
@@ -29,7 +29,7 @@ const Home = ({showOrderModal}) => {
 }
 
 Home.propTypes = {
-    showModal: PropTypes.func.isRequired
+  showOrderModal: PropTypes.func.isRequired
 }
 
 export default Home;
