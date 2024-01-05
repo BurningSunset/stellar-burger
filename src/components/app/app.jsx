@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import ProfilePage from "../../pages/profile-page/profile";
 import OrderPage from "../../pages/order-page/order";
 import OrderDetails from "../order-details/order-details";
+import { getIngredients } from "../../services/actions/getIngredients";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,13 @@ function App() {
   const closeOrderModal = () => {
     setOrderModalVisible(false);
   };
+
+  // Перенесли из home, чтобы во всём приложении были ингредиенты
+  // Так как в обратном случае мы в модалках их не видим
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+
 
   return (
     <div className={styles.app}>

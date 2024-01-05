@@ -1,22 +1,12 @@
 import styles from './ingredient-details.module.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { getIngredients } from '../../services/actions/getIngredients';
-import { useEffect } from 'react';
+
 const IngredientDetails = () => {
-    const dispatch = useDispatch();
 
     let currentIngredient = useSelector((state) => state.currentIngredient.ingredient);
     let ingredients = useSelector((state) => state.getIngredients.ingredients)
     const {ingredientId} = useParams()
-
-    // срабатывает, если в сторе нет ингредиентов (например, 
-    // когда мы не нажали f5 на странице с модалкой, )
-    useEffect(() => {
-        if (!ingredients || ingredients.length === 0) {
-          dispatch(getIngredients());
-        }
-      }, [dispatch, ingredients]);
 
     // срабатывает, если страница открыта не через модалку
     if (!currentIngredient) {
