@@ -23,15 +23,19 @@ let initialState = {
       setValues({...values, [name]: value});
     };
 
-    const onSubmit = e => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        dispatch(patchUser(values))
-        initialState = {
-            name: values.name,
-            email: values.email,
-            password: ''
+        try {
+           await dispatch(patchUser(values))
+            initialState = {
+                name: values.name,
+                email: values.email,
+                password: ''
+            }
+            setValues(initialState)
+        } catch (error) {
+            console.error("Ошибка при изменении данных пользователя:", error);
         }
-        setValues(initialState)
     }
 
     const cancel = () => {
@@ -39,8 +43,12 @@ let initialState = {
     }
 
     const logoutHandler = async () => {
-        await dispatch(logout())
-        navigate('/')
+        try {
+            await dispatch(logout())
+            navigate('/')
+        } catch (error) {
+            console.error("Ошибка при выходе:", error);
+        }
     }
 
     return (

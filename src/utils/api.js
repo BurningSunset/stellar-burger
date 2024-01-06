@@ -2,7 +2,6 @@ import { fetchWithRefresh } from "./fetchWithRefresh";
 import { checkResponse } from "./checkResponse";
 import { URL } from "./apiConst";
 import { setUser, setAuthChecked } from "../services/actions/checkUserAuth";
-import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getUser = () => {
   return async (dispatch) => {
@@ -88,7 +87,6 @@ export const register = ({ name, email, password }) => {
           password: password
       })
   }).then(checkResponse)
-  console.log(response.user)
   dispatch(setUser(response.user))
   localStorage.setItem('accessToken', response.accessToken);
   localStorage.setItem('refreshToken', response.refreshToken);
@@ -123,7 +121,6 @@ export const reset = ({ password, token }) => {
           token: token
       })
   }).then(checkResponse)
-  console.log(response)
   return response;
   }
 }
@@ -142,7 +139,6 @@ export const patchUser = ({ name, email, password }) => {
         password: password
     })
   }).then(checkResponse)
-  console.log(response)
   return response
   }
 }

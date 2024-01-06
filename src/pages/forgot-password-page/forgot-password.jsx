@@ -17,16 +17,20 @@ const ForgotPasswordPage = () => {
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = e => {
+        const onSubmit = async (e) => {
             e.preventDefault()
-            if (localStorage.getItem("forgotToken")) {
-                console.log('trigger!')
-                dispatch(forgotTokenDelete())
+            try {
+                if (localStorage.getItem("forgotToken")) {
+                    console.log('trigger!')
+                    await dispatch(forgotTokenDelete())
+                }
+                await dispatch(forgot(values))
+                setValues(initialState)
+                dispatch(forgotTokenConfirm())
+                navigate('/reset-password')
+            } catch (error) {
+                console.error("Ошибка при отправке кода:", error);
             }
-            dispatch(forgot(values))
-            setValues(initialState)
-            dispatch(forgotTokenConfirm())
-            navigate('/reset-password')
         }
     return (
         <div className={`${styles.forgot}`}> 

@@ -17,12 +17,16 @@ const ResetPasswordPage = () => {
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = e => {
+        const onSubmit = async (e) => {
             e.preventDefault()
-            dispatch(reset(values))
-            setValues(initialState)
-            forgotTokenDelete()
-            navigate('/login')
+            try {
+                await dispatch(reset(values))
+                setValues(initialState)
+                forgotTokenDelete()
+                navigate('/login')
+            } catch (error) {
+                console.error("Ошибка при восстановлении пароля:", error);
+            }
         }
 
     return (

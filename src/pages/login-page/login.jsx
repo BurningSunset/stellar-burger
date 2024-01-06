@@ -20,9 +20,14 @@ const LoginPage = () => {
 
         const onSubmit = async (e) => {
             e.preventDefault();
-            await dispatch(login(values));
-            navigate('/'); 
-        }
+            try {
+                await dispatch(login(values));
+                navigate('/');
+            } catch (error) {
+                console.error("Ошибка при входе:", error);
+            }
+        };
+        
     return (
         <form className={`${styles.login}`} onSubmit={onSubmit}> 
             <h2 className={`mb-6`}>

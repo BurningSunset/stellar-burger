@@ -19,11 +19,15 @@ const RegistrationPage = () => {
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = e => {
+        const onSubmit = async (e) => {
             e.preventDefault()
-            dispatch(register(values))
-            setValues(initialState)
-            navigate('/'); 
+            try {
+                await dispatch(register(values))
+                setValues(initialState)
+                navigate('/'); 
+            } catch (error) {
+                console.error("Ошибка при регистрации:", error);
+            }
         }
     return (
         <form className={`${styles.register}`} onSubmit={onSubmit}> 
