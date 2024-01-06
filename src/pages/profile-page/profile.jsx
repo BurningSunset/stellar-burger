@@ -33,6 +33,7 @@ let initialState = {
                 password: ''
             }
             setValues(initialState)
+            alert('Данные успешно обновлены')
         } catch (error) {
             console.error("Ошибка при изменении данных пользователя:", error);
         }
