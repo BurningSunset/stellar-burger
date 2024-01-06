@@ -2,7 +2,7 @@ import styles from './register.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { registerAsync } from '../../utils/api'
+import { register } from '../../utils/api'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 const RegistrationPage = () => {
@@ -21,7 +21,7 @@ const RegistrationPage = () => {
 
         const onSubmit = e => {
             e.preventDefault()
-            dispatch(registerAsync(values))
+            dispatch(register(values))
             setValues(initialState)
             navigate('/'); 
         }

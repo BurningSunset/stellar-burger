@@ -39,7 +39,8 @@ export const checkUserAuth = () => {
   }
 };
 
-export const login = async ({ email, password }) => {
+export const login = ({ email, password }) => {
+  return async dispatch => {
   const response = await fetch(`${URL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -50,13 +51,16 @@ export const login = async ({ email, password }) => {
           password: password
       })
   }).then(checkResponse)
+  console.log(response.user)
+  dispatch(setUser(response.user));
   localStorage.setItem('accessToken', response.accessToken);
   localStorage.setItem('refreshToken', response.refreshToken);
   return response.user;
 }
+}
 
 export const logout = () => {
-  console.log('logout')
+  return async dispatch => {
   fetch(`${URL}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -66,11 +70,13 @@ export const logout = () => {
           token: localStorage.getItem('refreshToken')
       })
   }).then(checkResponse)
+  dispatch(setUser(null));
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
 }
-
-export const register = async ({ name, email, password }) => {
+}
+export const register = ({ name, email, password }) => {
+  return async dispatch => {
   const response = await fetch(`${URL}/auth/register`, {
       method: 'POST',
       headers: {
@@ -82,13 +88,17 @@ export const register = async ({ name, email, password }) => {
           password: password
       })
   }).then(checkResponse)
+  console.log(response.user)
+  dispatch(setUser(response.user))
   localStorage.setItem('accessToken', response.accessToken);
   localStorage.setItem('refreshToken', response.refreshToken);
   return response.user;
+  }
 }
 
-export const forgot = async ({ email }) => {
-  const response = await fetch(`${URL}/password-reset`, {
+export const forgot = ({ email }) => {
+  return async () => {
+    const response = await fetch(`${URL}/password-reset`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -97,12 +107,13 @@ export const forgot = async ({ email }) => {
           email: email,
       })
   }).then(checkResponse)
-  console.log(response)
   return response;
+  }
 }
 
-export const reset = async ({ password, token }) => {
-  const response = await fetch(`${URL}/password-reset/reset`, {
+export const reset = ({ password, token }) => {
+  return async () => {
+    const response = await fetch(`${URL}/password-reset/reset`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -114,28 +125,30 @@ export const reset = async ({ password, token }) => {
   }).then(checkResponse)
   console.log(response)
   return response;
+  }
 }
 
-export const patchUser = async ({ name, email, password }) => {
-  const response = await fetch(`${URL}/auth/user`, {
-          method: 'PATCH',
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              authorization: localStorage.accessToken
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password
-        })
-      }).then(checkResponse)
-      console.log(response)
-      return response
+export const patchUser = ({ name, email, password }) => {
+  return async () => {
+    const response = await fetch(`${URL}/auth/user`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          authorization: localStorage.accessToken
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password
+    })
+  }).then(checkResponse)
+  console.log(response)
+  return response
+  }
 }
 
 export const forgotTokenConfirm = () => {
   return async () => {
-    console.log('trig')
       if (!localStorage.getItem("forgotToken")) {
         localStorage.setItem("forgotToken", true);
       }
@@ -144,61 +157,7 @@ export const forgotTokenConfirm = () => {
 export const forgotTokenDelete = () => {
   return async () => {
       if (localStorage.getItem("forgotToken")) {
-        localStorage.deleteItem("forgotToken", false);
+        localStorage.removeItem("forgotToken", false);
       }
   }
-};
-
-// export const getUserInfo = async () => {
-//     const response = await fetch(`${URL}/auth/user`, {
-//       method: 'GET',
-//       headers: {
-//           'Content-Type': 'application/json;charset=utf-8',
-//           authorization: localStorage.accessToken
-//       },
-      
-//   }).then(checkResponse)
-//   .then(
-//     dispatch(setUser(response.user))
-//   )
-//   return response.user;
-// };
-
-export const loginAsync = createAsyncThunk(
-  'auth/login',
-  login
-);
-
-export const logoutAsync = createAsyncThunk(
-  'auth/logout',
-  logout
-);
-
-export const registerAsync = createAsyncThunk(
-  'auth/register',
-  register
-);
-
-export const forgotAsync = createAsyncThunk(
-  'api/password-reset',
-  forgot
-);
-
-export const resetAsync = createAsyncThunk(
-  'api/password-reset/reset',
-  reset
-);
-
-export const patchUserAsync = createAsyncThunk(
-  'api/password-reset/reset',
-  patchUser
-);
-
-export const api = {
-  loginAsync,
-  logoutAsync,
-  registerAsync,
-  forgotAsync,
-  resetAsync,
-  patchUserAsync
 };

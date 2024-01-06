@@ -1,16 +1,15 @@
 import styles from './forgot-password.module.css'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { forgotAsync, forgotTokenConfirm } from '../../utils/api'
+import { forgot, forgotTokenConfirm, forgotTokenDelete } from '../../utils/api'
 
 const ForgotPasswordPage = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const initialState = {
-        name: '',
-        email: '',
-        password: ''
+        email: ''
     }
         const [values, setValues] = useState(initialState);
         const onChange = e => {
@@ -20,9 +19,14 @@ const ForgotPasswordPage = () => {
 
         const onSubmit = e => {
             e.preventDefault()
-            dispatch(forgotAsync(values))
+            if (localStorage.getItem("forgotToken")) {
+                console.log('trigger!')
+                dispatch(forgotTokenDelete())
+            }
+            dispatch(forgot(values))
             setValues(initialState)
             dispatch(forgotTokenConfirm())
+            navigate('/reset-password')
         }
     return (
         <div className={`${styles.forgot}`}> 

@@ -2,7 +2,7 @@ import styles from './profile.module.css'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { logoutAsync, patchUserAsync } from '../../utils/api'
+import { logout, patchUser } from '../../utils/api'
 import { Link, useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
@@ -17,7 +17,6 @@ let initialState = {
     password: ''
 }
 
-
     const [values, setValues] = useState(initialState);
     const onChange = e => {
       const { name, value } = e.target;
@@ -26,10 +25,10 @@ let initialState = {
 
     const onSubmit = e => {
         e.preventDefault()
-        dispatch(patchUserAsync(values))
+        dispatch(patchUser(values))
         initialState = {
-            name: user.name,
-            email: user.email,
+            name: values.name,
+            email: values.email,
             password: ''
         }
         setValues(initialState)
@@ -39,21 +38,20 @@ let initialState = {
         setValues(initialState)
     }
 
-    const logout = async () => {
-        await dispatch(logoutAsync())
+    const logoutHandler = async () => {
+        await dispatch(logout())
         navigate('/')
     }
 
     return (
         <div className={`pt-20 ${styles.pageContainer}`}>
-
             <div className={`${styles.menu}`}>
                 <ul>
                     <li className="text text_type_main-medium">Профиль</li>
                     <Link to={'/order'}>
                         <li className="text text_type_main-medium text_color_inactive">История заказов</li>
                     </Link>
-                    <li className="text text_type_main-medium text_color_inactive" onClick={logout}>Выход</li>
+                    <li className="text text_type_main-medium text_color_inactive" onClick={logoutHandler}>Выход</li>
                 </ul>
                 <p className={`${styles.pInActive} mt-20 text text_type_main-default`}>В этом разделе вы можете изменить свои персональные данные</p>
             </div>

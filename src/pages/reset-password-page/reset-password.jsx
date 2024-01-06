@@ -2,9 +2,10 @@ import styles from './reset-password.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { forgotTokenDelete, resetAsync } from '../../utils/api'
+import { forgotTokenDelete, reset } from '../../utils/api'
+import { useNavigate } from 'react-router-dom'
 const ResetPasswordPage = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const initialState = {
         password: '',
@@ -18,9 +19,10 @@ const ResetPasswordPage = () => {
 
         const onSubmit = e => {
             e.preventDefault()
-            dispatch(resetAsync(values))
+            dispatch(reset(values))
             setValues(initialState)
             forgotTokenDelete()
+            navigate('/login')
         }
 
     return (
