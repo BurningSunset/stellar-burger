@@ -8,8 +8,10 @@ import { ItemTypes } from '../../utils/itemTypes';
 import { decreaseCounter } from '../../services/actions/getIngredients'
 import { submitOrder } from '../../services/actions/createOrder'
 import { addIngredient, setBun, deleteIngredient } from '../../services/actions/currentConstructorIngredients';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = ({ showModal }) => {
+    const navigate = useNavigate()
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
     let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
     let totalCost = 0
@@ -54,7 +56,7 @@ const BurgerConstructor = ({ showModal }) => {
               )
               showModal()
         } else {
-            alert('Нужно залогиниться')
+            navigate('/login')
         }
       }
 
