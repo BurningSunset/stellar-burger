@@ -1,0 +1,35 @@
+.pageContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 1280px;
+    margin: auto;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+
+.menu ul li {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    cursor: pointer;
+}
+
+.pInActive {
+    color: rgb(64,64,82);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around
+}

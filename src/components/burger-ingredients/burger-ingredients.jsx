@@ -2,11 +2,10 @@ import { useRef } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 
-function BurgerIngredients({showModal}) {
+function BurgerIngredients() {
 
     const { currentTab } = useSelector(state => state.switchTab)
 
@@ -54,16 +53,16 @@ function BurgerIngredients({showModal}) {
                 </Tab>
             </div>
             <div className={styles.ingredientBlock} ref={ingredientBlockRef} onScroll={categoryScroll}>
-                <BurgerIngredientsCategory type="bun" ref={bunRef} categoryHeading="Булки" showModal={showModal}/>
-                <BurgerIngredientsCategory type="sauce" ref={sauceRef} categoryHeading="Соусы" showModal={showModal}/>
-                <BurgerIngredientsCategory type="main" ref={mainRef} categoryHeading="Начинки" showModal={showModal}/> 
+                <BurgerIngredientsCategory type="bun" ref={bunRef} categoryHeading="Булки"/>
+                <BurgerIngredientsCategory type="sauce" ref={sauceRef} categoryHeading="Соусы"/>
+                <BurgerIngredientsCategory type="main" ref={mainRef} categoryHeading="Начинки"/> 
             </div>
         </section>
     )
 }
 
-BurgerIngredients.propTypes = {
-    showModal: PropTypes.func.isRequired
-}
+// BurgerIngredients.propTypes = {
+//     showModal: PropTypes.func.isRequired
+// }
 
 export default BurgerIngredients

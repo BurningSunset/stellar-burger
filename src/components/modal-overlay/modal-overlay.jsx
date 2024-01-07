@@ -2,16 +2,15 @@ import { useEffect } from 'react'
 import styles from './modal-overlay.module.css'
 import PropTypes from 'prop-types'
 
-const ModalOverlay = ({ children, isVisible, onHide }) => {
-    const overlayClassName = `${isVisible ? styles.visible : styles.hidden}`
+const ModalOverlay = ({ children, onHide }) => {
     const overlayClickHandler = (e) => {
-        if (e.target === e.currentTarget) {
+        if (e.target === e.currentTarget ) {
             onHide()
         }
     }
     const escClickHandler = (e) => {
         if (e.key === 'Escape') {
-            onHide()
+            onHide && onHide()
         }
     }
     useEffect(() => {
@@ -20,14 +19,13 @@ const ModalOverlay = ({ children, isVisible, onHide }) => {
             document.removeEventListener('keydown', escClickHandler)
     },[])
     return (
-        <div className={`${styles.overlay} ${overlayClassName}`} onClick={overlayClickHandler}>
+        <div className={`${styles.overlay}`} onClick={overlayClickHandler}>
             {children}
         </div>
     )
 }
 ModalOverlay.propTypes = {
     children: PropTypes.node.isRequired,
-    isVisible: PropTypes.bool.isRequired,
     onHide: PropTypes.func.isRequired
 }
 export default ModalOverlay

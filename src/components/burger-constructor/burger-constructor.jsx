@@ -8,12 +8,14 @@ import { ItemTypes } from '../../utils/itemTypes';
 import { decreaseCounter } from '../../services/actions/getIngredients'
 import { submitOrder } from '../../services/actions/createOrder'
 import { addIngredient, setBun, deleteIngredient } from '../../services/actions/currentConstructorIngredients';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = ({ showModal }) => {
+    const navigate = useNavigate()
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
     let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
     let totalCost = 0
-
+    const {user} = useSelector((store) => store.user)
     if (bun && ingredientList.length !== 0 ) {
         totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.price, 0);
         totalCost += bun.price * 2
@@ -47,11 +49,15 @@ const BurgerConstructor = ({ showModal }) => {
 
       const clickHandler = () => {
         // соединяем булочки и другие ингредиенты
-        let fullIngredientList = [bun, ...ingredientList, bun]
-        dispatch(
-            submitOrder(fullIngredientList)
-          )
-          showModal()
+        if (user) {
+            let fullIngredientList = [bun, ...ingredientList, bun]
+            dispatch(
+                submitOrder(fullIngredientList)
+              )
+              showModal()
+        } else {
+            navigate('/login')
+        }
       }
 
     return (
