@@ -1,8 +1,8 @@
 import styles from './login.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { login } from '../../utils/api'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import styles from "./home.module.css";
@@ -5,9 +6,11 @@ import styles from "./home.module.css";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { PropTypes } from "prop-types";
+type HomeProps = {
+  showOrderModal: () => void
+}
 
-const Home = ({showOrderModal}) => {
+const Home: FC<HomeProps> = ({showOrderModal}) => {
 
   return (
     <div className={styles.home}>
@@ -17,10 +20,6 @@ const Home = ({showOrderModal}) => {
         </DndProvider>
     </div>
   );
-}
-
-Home.propTypes = {
-  showOrderModal: PropTypes.func.isRequired
 }
 
 export default Home;
