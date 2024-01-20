@@ -4,7 +4,7 @@ import styles from './order.module.css'
 const OrderPage: FC = () => {
     return (
         <div className={styles.disc}>
-            <span>Здесь пока пусто</span>
+            <span>Здесь пока пусто. Содержимое добавится в следующем спринте</span>
         </div>
     )
 }
