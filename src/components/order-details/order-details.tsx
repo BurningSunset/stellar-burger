@@ -1,10 +1,11 @@
 import styles from './order-details.module.css'
 import succesIcon from '../../images/graphics.svg'
 import { useSelector } from 'react-redux'
+import { TOrder } from '../../utils/types'
 
 const OrderDetails = () => {
-    const { order } = useSelector((state) => state.createOrder)
-
+    // @ts-ignore
+    const { order }: { order: TOrder } = useSelector((state) => state.createOrder)
     return (
         <div className={styles.orderContainer}>
             {order ? 

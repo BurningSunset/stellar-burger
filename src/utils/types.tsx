@@ -12,3 +12,11 @@ export type TIngredient = {
     image_large: string,
     __v: number,
 }
+
+export type TOrder = {
+    success: boolean,
+    name: string,
+    order: {
+        number: number
+    }
+}
