@@ -1,25 +1,27 @@
 import styles from './register.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { register } from '../../utils/api'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-const RegistrationPage = () => {
+import { Dispatch } from 'redux'
+
+const RegistrationPage: FC = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch: Dispatch<any> = useDispatch()
     const initialState = {
         name: '',
         email: '',
         password: ''
     }
         const [values, setValues] = useState(initialState);
-        const onChange = e => {
+        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
           const { name, value } = e.target;
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = async (e) => {
+        const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
             try {
                 await dispatch(register(values))
