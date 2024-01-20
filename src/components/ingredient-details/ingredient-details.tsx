@@ -2,27 +2,20 @@ import { FC } from 'react';
 import styles from './ingredient-details.module.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-
-type TIngredientDetailsParams = {
-    ingredientId?: string
-}
+import { TIngredient } from '../../utils/types';
 
 const IngredientDetails: FC = () => {
     // игнор так как по условию спринта
     // можно пока что не типизировать стор
     // @ts-ignore
-    let currentIngredient = useSelector((state) => state.currentIngredient.ingredient);
+    let currentIngredient: TIngredient = useSelector((state) => state.currentIngredient.ingredient);
     // @ts-ignore
-    let ingredients = useSelector((state) => state.getIngredients.ingredients)
-    const { ingredientId }: TIngredientDetailsParams = useParams()
+    let ingredients: TIngredient[] = useSelector((state) => state.getIngredients.ingredients);
+    const { ingredientId }: {ingredientId?: string} = useParams()
 
     // срабатывает, если страница открыта не через модалку
     if (!currentIngredient) {
-        // структура ингредиента как в одном из функциональных файлов
-        // сделать тип также в отдельный файл?
-        // @ts-ignore
-        currentIngredient = ingredients.find(ingredient => ingredient._id === ingredientId);
-        console.log(currentIngredient)
+        currentIngredient = ingredients.find((ingredient: TIngredient) => ingredient._id === ingredientId) as TIngredient;
     }
 
     return (
