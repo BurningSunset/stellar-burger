@@ -1,13 +1,14 @@
 import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import ingredientType from '../../utils/PropTypes'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
 import { useDispatch } from 'react-redux'
 import { incrementCounter } from '../../services/actions/getIngredients'
 import { useLocation, Link } from "react-router-dom";
+import { TIngredient } from '../../utils/types'
+import { FC } from 'react'
 
-const BurgerIngredientsItem = ({item}) => {
+const BurgerIngredientsItem: FC<TIngredient> = (item) => {
     
     const location = useLocation();
     const ingredientId = item['_id'];
@@ -41,7 +42,7 @@ const BurgerIngredientsItem = ({item}) => {
         >
             <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }}>
                 <div className={`${styles.counter} `}>
-                    {item.counter !== 0 && <Counter count={item.counter}/> }
+                    {item.counter !== 0 && <Counter count={item.counter!}/> }
                 </div>
                 <img src={item.image} alt={item.name} className='ml-4 mr-4'></img>
                 <span className={styles.itemPrice}>
@@ -54,7 +55,4 @@ const BurgerIngredientsItem = ({item}) => {
     )
 }
 
-BurgerIngredientsItem.propTypes = {
-    item: ingredientType.isRequired,
-}
 export default BurgerIngredientsItem

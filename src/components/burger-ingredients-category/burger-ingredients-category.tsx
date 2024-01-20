@@ -23,7 +23,7 @@ const BurgerIngredientsCategory: FC<TProps> = forwardRef(({ type, categoryHeadin
             <div className={`mb-10 ${styles.block}`}>
                 {filteredData.map((item: TIngredient) => (
                     <BurgerIngredientsItem
-                        item={item}
+                        {...item}
                         key={item._id}
                     />
                 ))}

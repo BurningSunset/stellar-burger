@@ -11,6 +11,7 @@ export type TIngredient = {
     image_mobile: string,
     image_large: string,
     __v: number,
+    counter?: number
 }
 
 export type TOrder = {
