@@ -17,6 +17,7 @@ const Protected: FC<TProtectedProps> = ({ onlyUnAuth = false, afterForgot = fals
   const location = useLocation();
     // @ts-ignore
   const user: User = useSelector((store) => store.user.user);
+
   if (!isAuthChecked) {
     // попозже лоадер сюда добавим
     return null;
@@ -38,6 +39,7 @@ const Protected: FC<TProtectedProps> = ({ onlyUnAuth = false, afterForgot = fals
 };
 
 export const OnlyAuth = Protected;
+
 export const OnlyUnAuth: FC<{ component: ReactElement }> = ({ component }) => (
   <Protected onlyUnAuth={true} component={component} />
 );
