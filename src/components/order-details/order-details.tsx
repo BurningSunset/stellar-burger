@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 import { TOrder } from '../../utils/types'
 
 const OrderDetails = () => {
+    // игнор так как по условию спринта
+    // можно пока что не типизировать стор
     // @ts-ignore
     const { order }: { order: TOrder } = useSelector((state) => state.createOrder)
     return (
