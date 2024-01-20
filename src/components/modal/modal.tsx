@@ -6,7 +6,7 @@ import { FC, ReactNode } from 'react';
 
 type Props = {
     children: ReactNode,
-    title: string,
+    title?: string,
     onHide: () => void
 }
 

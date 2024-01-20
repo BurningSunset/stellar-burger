@@ -9,7 +9,7 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password";
 
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import RegisterPage from "../../pages/register-page/register";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../utils/api";
@@ -19,8 +19,11 @@ import OrderPage from "../../pages/order-page/order";
 import OrderDetails from "../order-details/order-details";
 import { getIngredients } from "../../services/actions/getIngredients";
 
-function App() {
-  const dispatch = useDispatch();
+import { Dispatch } from "redux";
+import { TBackground } from "../../utils/types";
+
+const App: FC = () => {
+  const dispatch: Dispatch<any> = useDispatch()
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -28,8 +31,7 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const background = location.state && location.state.background;
-
+  const background: TBackground = location.state && location.state.background;
   const onHide = () => {
     navigate(-1);
   }
@@ -71,9 +73,7 @@ function App() {
               path='/ingredients/:ingredientId' 
               element={
                 <Modal onHide={onHide} >
-                  <IngredientDetails 
-                  />
-                   {console.log('Modal trigger')}
+                  <IngredientDetails />
                 </Modal>
               }
             />

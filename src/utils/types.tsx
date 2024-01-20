@@ -63,3 +63,11 @@ export type TPatchResponse = {
     success: boolean;
     user: User
 }
+
+export type TBackground = {
+    hash: string;
+    key: string;
+    pathname: string;
+    search: string;
+    state: null;
+}

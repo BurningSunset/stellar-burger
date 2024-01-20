@@ -4,7 +4,7 @@ import { FC, ReactElement } from "react";
 import { User } from "../../utils/types";
 
 type TProtectedProps = {
-  onlyUnAuth: boolean;
+  onlyUnAuth?: boolean;
   afterForgot?: boolean;
   component: ReactElement;
 }
