@@ -1,23 +1,25 @@
 import styles from './reset-password.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { forgotTokenDelete, reset } from '../../utils/api'
 import { Link, useNavigate } from 'react-router-dom'
-const ResetPasswordPage = () => {
+import { Dispatch } from 'redux'
+
+const ResetPasswordPage: FC = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch: Dispatch<any> = useDispatch()
     const initialState = {
         password: '',
         token: ''
     }
         const [values, setValues] = useState(initialState);
-        const onChange = e => {
+        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
           const { name, value } = e.target;
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = async (e) => {
+        const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
             try {
                 await dispatch(reset(values))
