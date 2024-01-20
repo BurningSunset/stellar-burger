@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 const Modal = ({children, title, onHide}) => {
     const modalRoot = document.getElementById('modal')
     return ReactDOM.createPortal (
-        <ModalOverlay  onHide={onHide}>
+        <ModalOverlay onHide={onHide}>
             <div className={styles.modalBlock}>
                 <div className={`${styles.header} mt-10 ml-10 mr-10`}>
                     {title && (
