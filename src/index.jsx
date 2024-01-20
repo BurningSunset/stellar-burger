@@ -7,7 +7,6 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './services/reducers/rootReducer'
-import { initialState } from './utils/initialState';
 import { BrowserRouter } from 'react-router-dom';
 
 const composeEnhancers =
