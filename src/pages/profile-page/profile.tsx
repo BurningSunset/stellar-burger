@@ -1,15 +1,20 @@
 import styles from './profile.module.css'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { logout, patchUser } from '../../utils/api'
 import { Link, useNavigate } from 'react-router-dom'
+import { Dispatch } from 'redux'
+import { User } from '../../utils/types'
 
 const ProfilePage = () => {
-
-const dispatch = useDispatch()
+const dispatch: Dispatch<any> = useDispatch()
 const navigate = useNavigate()
-const { user } = useSelector((state) => state.user)
+
+    // игнор так как по условию спринта
+    // можно пока что не типизировать стор
+    // @ts-ignore
+const { user }: {user: User} = useSelector((state) => state.user)
 
 let initialState = {
     name: user.name,
@@ -18,12 +23,12 @@ let initialState = {
 }
 
     const [values, setValues] = useState(initialState);
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setValues({...values, [name]: value});
     };
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
            await dispatch(patchUser(values))
