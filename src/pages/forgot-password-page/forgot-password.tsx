@@ -1,27 +1,27 @@
 import styles from './forgot-password.module.css'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { forgot, forgotTokenConfirm, forgotTokenDelete } from '../../utils/api'
+import { Dispatch } from 'redux'
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage: FC = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch: Dispatch<any> = useDispatch()
     const initialState = {
         email: ''
     }
         const [values, setValues] = useState(initialState);
-        const onChange = e => {
+        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
           const { name, value } = e.target;
           setValues({...values, [name]: value});
         };
 
-        const onSubmit = async (e) => {
+        const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
             try {
                 if (localStorage.getItem("forgotToken")) {
-                    console.log('trigger!')
                     await dispatch(forgotTokenDelete())
                 }
                 await dispatch(forgot(values))
