@@ -6,10 +6,11 @@ import { TIngredient } from '../../utils/types';
 
 type TProps = {
     type: string;
-    categoryHeading: string
+    categoryHeading: string;
+    ref: ForwardedRef<HTMLDivElement>
 }
 
-const BurgerIngredientsCategory: FC<TProps> = forwardRef(({ type, categoryHeading }, ref: ForwardedRef<HTMLDivElement>) => {
+const BurgerIngredientsCategory: FC<TProps> = forwardRef(({ type, categoryHeading }, ref) => {
     // игнор так как по условию спринта
     // можно пока что не типизировать стор
     // @ts-ignore
