@@ -2,14 +2,16 @@ import { fetchWithRefresh } from "./fetchWithRefresh";
 import { checkResponse } from "./checkResponse";
 import { URL } from "./apiConst";
 import { setUser, setAuthChecked } from "../services/actions/checkUserAuth";
+import { Dispatch } from "redux";
+import { TLogin, TResponse, TRegister, TPassResponse, TPatchResponse } from "./types";
 
 export const getUser = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch<any>) => {
       fetchWithRefresh(`${URL}/auth/user`, {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json',
-                  authorization: localStorage.getItem('accessToken'),
+                  authorization: localStorage.getItem('accessToken') || '',
               },
           })
           .then((response) => {
@@ -23,24 +25,27 @@ export const getUser = () => {
 };
 
 export const checkUserAuth = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch<any>) => {
       if (localStorage.getItem("accessToken")) {
-          dispatch(getUser())
-              .catch(() => {
+        try {
+          await dispatch(getUser())
+        } catch (error) {
                   localStorage.removeItem("accessToken");
                   localStorage.removeItem("refreshToken");
                   dispatch(setUser(null));
-              })
-              .finally(() => dispatch(setAuthChecked(true)));
+              }
+          finally { 
+            dispatch(setAuthChecked(true))
+          };
       } else {
           dispatch(setAuthChecked(true));
       }
   }
 };
 
-export const login = ({ email, password }) => {
-  return async dispatch => {
-  const response = await fetch(`${URL}/auth/login`, {
+export const login = ({ email, password }: TLogin) => {
+  return async (dispatch: Dispatch<any>) => {
+  const response: TResponse = await fetch(`${URL}/auth/login`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -50,7 +55,6 @@ export const login = ({ email, password }) => {
           password: password
       })
   }).then(checkResponse)
-  console.log(response.user)
   dispatch(setUser(response.user));
   localStorage.setItem('accessToken', response.accessToken);
   localStorage.setItem('refreshToken', response.refreshToken);
@@ -59,7 +63,7 @@ export const login = ({ email, password }) => {
 }
 
 export const logout = () => {
-  return async dispatch => {
+  return async (dispatch: Dispatch<any>) => {
   fetch(`${URL}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -74,9 +78,10 @@ export const logout = () => {
   localStorage.removeItem('refreshToken');
 }
 }
-export const register = ({ name, email, password }) => {
-  return async dispatch => {
-  const response = await fetch(`${URL}/auth/register`, {
+
+export const register = ({ name, email, password }: TRegister) => {
+  return async (dispatch: Dispatch<any>) => {
+  const response: TResponse = await fetch(`${URL}/auth/register`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -94,9 +99,9 @@ export const register = ({ name, email, password }) => {
   }
 }
 
-export const forgot = ({ email }) => {
+export const forgot = ({ email }: {email: string}) => {
   return async () => {
-    const response = await fetch(`${URL}/password-reset`, {
+    const response: TPassResponse = await fetch(`${URL}/password-reset`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -109,9 +114,9 @@ export const forgot = ({ email }) => {
   }
 }
 
-export const reset = ({ password, token }) => {
+export const reset = ({ password, token }: {password: string; token: string}) => {
   return async () => {
-    const response = await fetch(`${URL}/password-reset/reset`, {
+    const response: TPassResponse = await fetch(`${URL}/password-reset/reset`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -125,9 +130,9 @@ export const reset = ({ password, token }) => {
   }
 }
 
-export const patchUser = ({ name, email, password }) => {
+export const patchUser = ({ name, email, password }: TRegister) => {
   return async () => {
-    const response = await fetch(`${URL}/auth/user`, {
+    const response: TPatchResponse = await fetch(`${URL}/auth/user`, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -146,14 +151,14 @@ export const patchUser = ({ name, email, password }) => {
 export const forgotTokenConfirm = () => {
   return async () => {
       if (!localStorage.getItem("forgotToken")) {
-        localStorage.setItem("forgotToken", true);
+        localStorage.setItem("forgotToken", 'true');
       }
   }
 };
 export const forgotTokenDelete = () => {
   return async () => {
       if (localStorage.getItem("forgotToken")) {
-        localStorage.removeItem("forgotToken", false);
+        localStorage.removeItem("forgotToken");
       }
   }
 };

@@ -1,10 +1,11 @@
 import { URL } from "./apiConst";
-// import { checkResponse } from "./checkResponse";
-const checkResponse = (res) => {
+import { TOptions } from "./types";
+
+const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-  export const refreshToken = () => {
+  export const refreshToken = (): Promise<any> => {
     return fetch(`${URL}/auth/token`, {
       method: "POST",
       headers: {
@@ -16,11 +17,11 @@ const checkResponse = (res) => {
     }).then(checkResponse);
   };
   
-  export const fetchWithRefresh = async (url, options) => {
+  export const fetchWithRefresh = async (url: string, options: TOptions): Promise<any> => {
     try {
       const res = await fetch(url, options);
       return await checkResponse(res);
-    } catch (err) {
+    } catch (err: any) {
       if (err.message === "jwt expired") {
         const refreshData = await refreshToken(); //обновляем токен
         if (!refreshData.success) {

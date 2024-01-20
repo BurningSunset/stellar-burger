@@ -30,6 +30,36 @@ export type User = {
     name: string
 }
 
-export type TResponse = {
+export type TOptions = {
+    method: string;
+    headers: {
+        'Content-Type': string;
+        authorization: string
+    }
+}
 
+export type TLogin = {
+    email: string;
+    password: string
+}
+
+export type TRegister = TLogin & {
+    name: string
+}
+
+export type TResponse = {
+    accessToken: string;
+    refreshToken: string;
+    user: User;
+    success: boolean
+}
+
+export type TPassResponse = {
+    message: string;
+    success: boolean
+}
+
+export type TPatchResponse = {
+    success: boolean;
+    user: User
 }

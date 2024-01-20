@@ -3,7 +3,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { forgotTokenDelete, reset } from '../../utils/api'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const ResetPasswordPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -59,7 +59,11 @@ const ResetPasswordPage = () => {
                     Сохранить
                 </Button>
             </form>
-            <p className="text text_type_main-default text_color_inactive mb-6">Вспомнили пароль? <a className={styles.a} href=''>Войти</a></p>
+            <p className="text text_type_main-default text_color_inactive mb-6">Вспомнили пароль? 
+                <Link className={styles.a} to={'/login'}>
+                        Войти
+                </Link>
+            </p>
         </div>
     )
 }
