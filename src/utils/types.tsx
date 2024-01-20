@@ -21,3 +21,5 @@ export type TOrder = {
         number: number
     }
 }
+
+export type HandleCloseFunction = (ingredient: { item: TIngredient }) => void;

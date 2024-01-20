@@ -1,14 +1,22 @@
 import styles from './burger-constructor-item.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import ingredientType from '../../utils/PropTypes'
-import PropTypes from 'prop-types'
 import { swapItems } from '../../services/actions/currentConstructorIngredients'
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
+import { TIngredient, HandleCloseFunction } from '../../utils/types';
 
-const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClose}) => {
-    const ref = useRef(null)
+type Item = {
+    item: TIngredient;
+    uid: number;
+    isLocked: undefined;
+    extraClass: string;
+    type?: 'top' | 'bottom';
+    handleClose?: HandleCloseFunction
+}
+
+const BurgerConstructorItem: FC<Item> = ({item, uid, isLocked, extraClass, type, handleClose}) => {
+    const ref = useRef<HTMLDivElement>(null)
     const dispatch = useDispatch()
 
     const [, drag] = useDrag({
@@ -17,7 +25,7 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
     })
     const [, drop] = useDrop({
         accept: "sort",
-        drop(item) {
+        drop(item: Item) {
             if (uid !== item.uid) {
                 dispatch(
                     swapItems(uid, item.uid)
@@ -35,7 +43,7 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
                     <ConstructorElement
                         extraClass={extraClass ? `${extraClass} ml-2 ${styles.spanOnMiddle}` : `ml-2 ${styles.spanOnMiddle}`}
                         text='Заглушка'
-                        price='Заглушка'
+                        price={0}
                         thumbnail='Заглушка'
                         type={type}
                         isLocked={isLocked}
@@ -47,21 +55,12 @@ const BurgerConstructorItem = ({item, uid, isLocked, extraClass, type, handleClo
                         thumbnail={item.image}
                         type={type}
                         isLocked={isLocked}
-                        handleClose={handleClose && type !== 'bun' ? () => handleClose({item}) : undefined}
+                        handleClose={handleClose && !type ? () => handleClose({item}) : undefined}
                     />
                 )
             }
         </div>
     )
-}
-
-BurgerConstructorItem.propTypes = {
-    item: ingredientType,
-    uid: PropTypes.string,
-    type: PropTypes.string,
-    isLocked: PropTypes.bool,
-    extraClass: PropTypes.string,
-    handleClose: PropTypes.func
 }
 
 export default BurgerConstructorItem
