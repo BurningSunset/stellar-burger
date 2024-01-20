@@ -7,10 +7,10 @@ import { useDrag, useDrop } from 'react-dnd';
 import { TIngredient, HandleCloseFunction } from '../../utils/types';
 
 type Item = {
-    item: TIngredient;
-    uid: number;
-    isLocked: undefined;
-    extraClass: string;
+    item?: TIngredient;
+    uid?: number;
+    isLocked?: boolean;
+    extraClass?: string;
     type?: 'top' | 'bottom';
     handleClose?: HandleCloseFunction
 }
@@ -55,7 +55,7 @@ const BurgerConstructorItem: FC<Item> = ({item, uid, isLocked, extraClass, type,
                         thumbnail={item.image}
                         type={type}
                         isLocked={isLocked}
-                        handleClose={handleClose && !type ? () => handleClose({item}) : undefined}
+                        handleClose={handleClose && !type ? () => handleClose(item) : undefined}
                     />
                 )
             }

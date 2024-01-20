@@ -1,7 +1,6 @@
 import styles from './burger-constructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes';
@@ -9,41 +8,46 @@ import { decreaseCounter } from '../../services/actions/getIngredients'
 import { submitOrder } from '../../services/actions/createOrder'
 import { addIngredient, setBun, deleteIngredient } from '../../services/actions/currentConstructorIngredients';
 import { useNavigate } from 'react-router-dom';
+import { TIngredient, User } from '../../utils/types';
+import { FC } from 'react';
 
-const BurgerConstructor = ({ showModal }) => {
+type Props = {
+    showModal: () => void
+}
+
+const BurgerConstructor: FC<Props> = ({ showModal }) => {
     const navigate = useNavigate()
-    const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients)
-    let costPlaceholder = 'Ждём, пока вы добавите ингредиенты...'
-    let totalCost = 0
-    const {user} = useSelector((store) => store.user)
+    // игнор так как по условию спринта
+    // можно пока что не типизировать стор
+    // @ts-ignore
+    const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients) as {bun: TIngredient, ingredientList: TIngredient[]}
+    let costPlaceholder: string = 'Ждём, пока вы добавите ингредиенты...'
+    let totalCost: number = 0
+    // @ts-ignore
+    const { user } = useSelector((store) => store.user) as {user: User}
     if (bun && ingredientList.length !== 0 ) {
-        totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.price, 0);
+        totalCost = ingredientList.reduce((sum: number, ingredient: TIngredient) => sum + ingredient.price, 0);
         totalCost += bun.price * 2
     }
-    const [{ canDrop }, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.INGREDIENT,
-        drop (ingredient) {
-            acceptIngredient(ingredient);
+        drop ({item}: {item: TIngredient}) {
+            acceptIngredient(item);
         },
         collect: (monitor) => ({
           canDrop: monitor.canDrop(),
         }),
       }))
-      const dispatch = useDispatch()
-
-      const acceptIngredient = (item) => {
-        const ingredient = {
-            ...item.item
-        }
+      const dispatch = useDispatch() as any
+      const acceptIngredient = (ingredient: TIngredient) => {
         if (ingredient.type === 'bun') {
             dispatch(setBun(ingredient))
         } else if (ingredient.type !== 'bun') {
             dispatch(addIngredient(ingredient))
         }
       }
-
-      const handleClose = (ingredient) => {
-        dispatch(decreaseCounter(ingredient.item._id))
+      const handleClose = (ingredient: TIngredient) => {
+        dispatch(decreaseCounter(ingredient._id))
         dispatch(deleteIngredient(ingredient))
       }
 
@@ -75,7 +79,8 @@ const BurgerConstructor = ({ showModal }) => {
                     isLocked
                 />}
                 <div className={`mt-4 mb-4 ${styles.ingredientBlock}`}>
-                    {(ingredientList.length > 0) && ingredientList?.map((item) => (
+                    {
+                    (ingredientList.length > 0) && ingredientList?.map((item) => (
                     <BurgerConstructorItem
                         key={item.uid}
                         uid={item.uid}
@@ -115,10 +120,6 @@ const BurgerConstructor = ({ showModal }) => {
             </div>
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    showModal: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor

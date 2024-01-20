@@ -27,5 +27,5 @@ export const setBun = (item) => ({
 
 export const deleteIngredient = (item) => ({
     type: DELETE_ITEM,
-    uid: item.item.uid
+    uid: item.uid
 })

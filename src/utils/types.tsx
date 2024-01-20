@@ -11,7 +11,8 @@ export type TIngredient = {
     image_mobile: string,
     image_large: string,
     __v: number,
-    counter?: number
+    counter?: number,
+    uid?: number
 }
 
 export type TOrder = {
@@ -22,4 +23,9 @@ export type TOrder = {
     }
 }
 
-export type HandleCloseFunction = (ingredient: { item: TIngredient }) => void;
+export type HandleCloseFunction = (ingredient: TIngredient ) => void;
+
+export type User = {
+    email: string;
+    name: string
+}
