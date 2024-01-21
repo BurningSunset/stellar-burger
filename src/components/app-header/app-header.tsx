@@ -1,12 +1,12 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './app-header.module.css'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-function AppHeader() {
+import { FC, useEffect, useState } from 'react'
+const AppHeader: FC = () => {
 
     const location = useLocation()
 
-    const [activeLink, setActiveLink] = useState(null);
+    const [activeLink, setActiveLink] = useState<string | null>(null);
 
     useEffect(() => {
       // Дополнительная проверка для страниц /login, /register, /reset-password, /forgot-password
@@ -20,8 +20,8 @@ function AppHeader() {
       }
     }, [location.pathname]);
 
-    const getLinkClass = (path) => `${styles.a} ${activeLink === path ? styles.active : styles.inactive}`
-    const getIconType = (path) => activeLink === path ? 'primary' : 'secondary';
+    const getLinkClass = (path: string): string => `${styles.a} ${activeLink === path ? styles.active : styles.inactive}`
+    const getIconType = (path: string):'primary' | 'secondary' => activeLink === path ? 'primary' : 'secondary';
 
     return (
         <header className={`pb-4 pt-4 ${styles.header}`}>

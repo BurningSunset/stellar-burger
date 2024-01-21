@@ -1,37 +1,41 @@
-import { useRef } from 'react';
+import { useRef, FC, RefObject } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 
-function BurgerIngredients() {
+const BurgerIngredients: FC = () => {
 
-    const { currentTab } = useSelector(state => state.switchTab)
+    // игнор так как по условию спринта
+    // можно пока что не типизировать стор
+    // @ts-ignore
+    const { currentTab }: {currentTab: string} = useSelector(state => state.switchTab)
 
     const dispatch = useDispatch()
-    const tabSwitcher = (tab) => {dispatch(switchTabDispatch(tab));}
-    const bunRef = useRef(null)
-    const sauceRef = useRef(null)
-    const mainRef = useRef(null)
-    const ingredientBlockRef = useRef(null)
-    const categoryScroll = () => {
+    const tabSwitcher = (tab: string): void => {dispatch(switchTabDispatch(tab));}
+    const bunRef = useRef<HTMLDivElement>(null)
+    const sauceRef = useRef<HTMLDivElement>(null)
+    const mainRef = useRef<HTMLDivElement>(null)
+    const ingredientBlockRef = useRef<HTMLDivElement>(null)
+    const categoryScroll = (): void => {
         const bunRect = bunRef.current?.getBoundingClientRect();
         const sauceRect = sauceRef.current?.getBoundingClientRect();
         const mainRect = mainRef.current?.getBoundingClientRect();
     
         const blockTop = ingredientBlockRef.current?.getBoundingClientRect()?.top || 0;
     
-        if (blockTop >= bunRect.top && blockTop < sauceRect.top) {
+        if (blockTop >= bunRect?.top! && blockTop < sauceRect?.top!) {
             tabSwitcher('bun');
-        } else if (blockTop >= sauceRect.top && blockTop < mainRect.top) {
+        } else if (blockTop >= sauceRect?.top! && blockTop < mainRect?.top!) {
             tabSwitcher('sauce');
-        } else if (blockTop >= mainRect.top) {
+        } else if (blockTop >= mainRect?.top!) {
             tabSwitcher('main');
         }
     }
 
-    const tabClickHandler = (ref, tab) => {
+    const tabClickHandler = (ref: RefObject<HTMLElement> | null, tab: string) => {
+        if (ref && ref.current)
         ref.current.scrollIntoView({
             behavior: `smooth`
         })
@@ -60,9 +64,5 @@ function BurgerIngredients() {
         </section>
     )
 }
-
-// BurgerIngredients.propTypes = {
-//     showModal: PropTypes.func.isRequired
-// }
 
 export default BurgerIngredients

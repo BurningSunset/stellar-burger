@@ -1,14 +1,19 @@
-import { useEffect } from 'react'
+import { FC, MouseEventHandler, ReactNode, useEffect } from 'react'
 import styles from './modal-overlay.module.css'
-import PropTypes from 'prop-types'
 
-const ModalOverlay = ({ children, onHide }) => {
-    const overlayClickHandler = (e) => {
+type Props = {
+    onHide: () => void;
+    children: ReactNode
+}
+
+const ModalOverlay: FC<Props> = ({ children, onHide }) => {
+
+    const overlayClickHandler: MouseEventHandler = (e) => {
         if (e.target === e.currentTarget ) {
             onHide()
         }
     }
-    const escClickHandler = (e) => {
+    const escClickHandler = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             onHide && onHide()
         }
@@ -24,8 +29,5 @@ const ModalOverlay = ({ children, onHide }) => {
         </div>
     )
 }
-ModalOverlay.propTypes = {
-    children: PropTypes.node.isRequired,
-    onHide: PropTypes.func.isRequired
-}
+
 export default ModalOverlay
