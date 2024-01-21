@@ -14,7 +14,7 @@ export const getUser = () => {
                   authorization: localStorage.getItem('accessToken') || '',
               },
           })
-          .then((response) => {
+          .then((response: any) => {
               if (response.success) {
                   dispatch(setUser(response.user));
               } else {
