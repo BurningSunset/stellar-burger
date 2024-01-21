@@ -6,21 +6,19 @@ import { Dispatch } from "redux";
 import { TLogin, TResponse, TRegister, TPassResponse, TPatchResponse } from "./types";
 
 export const getUser = () => {
-  return async (dispatch: Dispatch<any>) => {
-      fetchWithRefresh(`${URL}/auth/user`, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-                  authorization: localStorage.getItem('accessToken') || '',
-              },
-          })
-          .then((response: any) => {
-              if (response.success) {
-                  dispatch(setUser(response.user));
-              } else {
-                  return Promise.reject('Ошибка данных с сервера');
-              }
-          });
+  return async (dispatch: Dispatch) => {
+    try {
+      const response = await fetchWithRefresh<TResponse>(`${URL}/auth/user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: localStorage.getItem('accessToken') || '',
+        },
+      });
+      dispatch(setUser(response.user));
+    } catch (error) {
+      console.error('getUser error!', error);
+    }
   };
 };
 
@@ -44,7 +42,7 @@ export const checkUserAuth = () => {
 };
 
 export const login = ({ email, password }: TLogin) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch) => {
   const response: TResponse = await fetch(`${URL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -63,7 +61,7 @@ export const login = ({ email, password }: TLogin) => {
 }
 
 export const logout = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch) => {
   fetch(`${URL}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -80,7 +78,7 @@ export const logout = () => {
 }
 
 export const register = ({ name, email, password }: TRegister) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch) => {
   const response: TResponse = await fetch(`${URL}/auth/register`, {
       method: 'POST',
       headers: {
