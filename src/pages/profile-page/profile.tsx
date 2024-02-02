@@ -1,18 +1,15 @@
 import styles from './profile.module.css'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { logout, patchUser } from '../../utils/api'
 import { Link, useNavigate } from 'react-router-dom'
-import { Dispatch } from 'redux'
-import { User } from '../../utils/types'
+import { User, useDispatch, useSelector } from '../../utils/types'
 
 const ProfilePage = () => {
-const dispatch: Dispatch<any> = useDispatch()
+const dispatch = useDispatch()
 const navigate = useNavigate()
 
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
+    // игнор пока редьюсеров нет
     // @ts-ignore
 const { user }: {user: User} = useSelector((state) => state.user)
 

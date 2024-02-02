@@ -30,6 +30,11 @@ export type TIngredient = {
     uid?: string
 }
 
+export type TIngredientResponse = {
+    data: TIngredient[],
+    success: boolean
+}
+
 export type TOrder = {
     success: boolean,
     name: string,

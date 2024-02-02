@@ -1,8 +1,7 @@
 import styles from './burger-ingredients-category.module.css'
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
-import { useSelector } from 'react-redux';
 import { forwardRef, FC, ForwardedRef } from 'react';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, useSelector } from '../../utils/types';
 
 type TProps = {
     type: string;
@@ -11,9 +10,6 @@ type TProps = {
 }
 
 const BurgerIngredientsCategory: FC<TProps> = forwardRef(({ type, categoryHeading }, ref) => {
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
     const { ingredients }: {ingredients: TIngredient[]} = useSelector(state => state.getIngredients)
     const filteredData = ingredients.filter((item: TIngredient) => item.type === type)
 

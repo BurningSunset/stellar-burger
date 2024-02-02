@@ -1,6 +1,6 @@
 import { URL } from '../../utils/apiConst'
 import { checkResponse } from '../../utils/checkResponse'
-import { AppThunk, TIngredient } from '../../utils/types'
+import { AppThunk, TIngredient, TIngredientResponse } from '../../utils/types'
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST'
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS'
@@ -56,8 +56,8 @@ export const getIngredients = (): AppThunk => {
             method: 'GET'
         })
         .then(checkResponse)
-        .then(response => {
-            const ingredientList = response.data.map((item: TIngredient) => ({...item, counter: 0}))
+        .then((response: TIngredientResponse) => {
+            const ingredientList: TIngredient[] = response.data.map((item: TIngredient) => ({...item, counter: 0}))
             dispatch(getIngredientsSuccess(ingredientList))
         }
         ).catch((error: Error) => {

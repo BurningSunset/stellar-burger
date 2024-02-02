@@ -13,17 +13,16 @@ import { FC, useEffect, useState } from "react";
 import RegisterPage from "../../pages/register-page/register";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../utils/api";
-import { useDispatch } from "react-redux";
+
 import ProfilePage from "../../pages/profile-page/profile";
 import OrderPage from "../../pages/order-page/order";
 import OrderDetails from "../order-details/order-details";
 import { getIngredients } from "../../services/actions/getIngredients";
 
-import { Dispatch } from "redux";
-import { TBackground } from "../../utils/types";
+import { TBackground, useDispatch } from "../../utils/types";
 
 const App: FC = () => {
-  const dispatch: Dispatch<any> = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(checkUserAuth());

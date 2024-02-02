@@ -2,14 +2,11 @@ import { useRef, FC, RefObject } from 'react';
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../utils/types';
 import { switchTabDispatch } from '../../services/actions/switchTab';
 
 const BurgerIngredients: FC = () => {
 
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
     const { currentTab }: {currentTab: string} = useSelector(state => state.switchTab)
 
     const dispatch = useDispatch()

@@ -1,14 +1,13 @@
 import styles from './forgot-password.module.css'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { forgot, forgotTokenConfirm, forgotTokenDelete } from '../../utils/api'
-import { Dispatch } from 'redux'
+import { useDispatch } from '../../utils/types'
 
 const ForgotPasswordPage: FC = () => {
     const navigate = useNavigate()
-    const dispatch: Dispatch<any> = useDispatch()
+    const dispatch = useDispatch()
     const initialState = {
         email: ''
     }

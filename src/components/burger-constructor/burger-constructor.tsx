@@ -1,14 +1,13 @@
 import styles from './burger-constructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
-import { useSelector, useDispatch } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes';
 import { decreaseCounter } from '../../services/actions/getIngredients'
 import { submitOrder } from '../../services/actions/createOrder'
 import { addIngredient, setBun, deleteIngredient } from '../../services/actions/currentConstructorIngredients';
 import { useNavigate } from 'react-router-dom';
-import { TIngredient, User } from '../../utils/types';
+import { TIngredient, User, useSelector, useDispatch } from '../../utils/types';
 import { FC } from 'react';
 
 type Props = {
@@ -17,13 +16,9 @@ type Props = {
 
 const BurgerConstructor: FC<Props> = ({ showModal }) => {
     const navigate = useNavigate()
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
     const { bun, ingredientList } = useSelector(state => state.currentConstructorIngredients) as {bun: TIngredient, ingredientList: TIngredient[]}
     let costPlaceholder: string = 'Ждём, пока вы добавите ингредиенты...'
     let totalCost: number = 0
-    // @ts-ignore
     const { user } = useSelector((store) => store.user) as {user: User}
     if (bun && ingredientList.length !== 0 ) {
         totalCost = ingredientList.reduce((sum: number, ingredient: TIngredient) => sum + ingredient.price, 0);
@@ -38,7 +33,7 @@ const BurgerConstructor: FC<Props> = ({ showModal }) => {
           canDrop: monitor.canDrop(),
         }),
       }))
-      const dispatch = useDispatch() as any
+      const dispatch = useDispatch()
       const acceptIngredient = (ingredient: TIngredient) => {
         if (ingredient.type === 'bun') {
             dispatch(setBun(ingredient))

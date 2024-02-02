@@ -1,14 +1,11 @@
 import { FC } from 'react';
 import styles from './ingredient-details.module.css'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, useSelector } from '../../utils/types';
 
 const IngredientDetails: FC = () => {
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
     let currentIngredient: TIngredient = useSelector((state) => state.currentIngredient.ingredient);
+    // ПОКА ОСТАВЛЯЕМ! ПРОВЕРИТЬ ПОСЛЕ ТИПИЗАЦИИ РЕДЬЮСЕРОВ
     // @ts-ignore
     let ingredients: TIngredient[] = useSelector((state) => state.getIngredients.ingredients);
     const { ingredientId }: {ingredientId?: string} = useParams()

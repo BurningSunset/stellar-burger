@@ -2,9 +2,8 @@ import styles from './burger-constructor-item.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { swapItems } from '../../services/actions/currentConstructorIngredients'
 import { FC, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
-import { TIngredient, HandleCloseFunction } from '../../utils/types';
+import { TIngredient, HandleCloseFunction, useDispatch } from '../../utils/types';
 
 type Item = {
     item?: TIngredient;
