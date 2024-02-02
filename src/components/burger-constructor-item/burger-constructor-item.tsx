@@ -8,7 +8,7 @@ import { TIngredient, HandleCloseFunction } from '../../utils/types';
 
 type Item = {
     item?: TIngredient;
-    uid?: number;
+    uid?: string;
     isLocked?: boolean;
     extraClass?: string;
     type?: 'top' | 'bottom';

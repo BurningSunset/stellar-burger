@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './services/reducers/rootReducer'
 import { BrowserRouter } from 'react-router-dom';
+import type {} from "redux-thunk/extend-redux";
 
 const composeEnhancers =
   typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -19,6 +20,9 @@ const store = createStore(rootReducer, enhancer);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+export type RootState = ReturnType<typeof rootReducer>
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -33,3 +37,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+ 
+// импортировал type {}, сделал тип рутстейт
