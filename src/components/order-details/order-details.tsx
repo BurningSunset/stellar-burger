@@ -3,9 +3,7 @@ import succesIcon from '../../images/graphics.svg'
 import { TOrder, useSelector } from '../../utils/types'
 
 const OrderDetails = () => {
-    // Оставляем пока редьюсеры не типизированы
-    // @ts-ignore
-    const { order }: { order: TOrder } = useSelector((state) => state.createOrder)
+    const { order }: { order: TOrder | null } = useSelector((state) => state.createOrder)
     return (
         <div className={styles.orderContainer}>
             {order ? 

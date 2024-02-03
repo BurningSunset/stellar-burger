@@ -9,13 +9,12 @@ const ProfilePage = () => {
 const dispatch = useDispatch()
 const navigate = useNavigate()
 
-    // игнор пока редьюсеров нет
-    // @ts-ignore
-const { user }: {user: User} = useSelector((state) => state.user)
+
+const { user }: {user: User | null} = useSelector((state) => state.user)
 
 let initialState = {
-    name: user.name,
-    email: user.email,
+    name: user?.name || '',
+    email: user?.email || '',
     password: ''
 }
 

@@ -32,15 +32,15 @@ export const orderFailureDispatch = (error: Error): IOrderFailureDispatch => ({
     error: error
 })
 
-export interface IOrderClearDispatch {
-    readonly type: typeof CLEAR_ORDER
-}
+// export interface IOrderClearDispatch {
+//     readonly type: typeof CLEAR_ORDER
+// } // необязательный функционал, который я реализую позже
 
 export type TOrderActions = 
     | IOrderSubmitDispatch
     | IOrderSuccessDispatch
     | IOrderFailureDispatch
-    | IOrderClearDispatch
+    // | IOrderClearDispatch
 
 export const submitOrder = (ingredients: TIngredient[]): AppThunk => {
     return function(dispatch) {
@@ -60,9 +60,9 @@ export const submitOrder = (ingredients: TIngredient[]): AppThunk => {
     }
 }
 
-export const clearOrder = () => {
-    return {
-        type: CLEAR_ORDER
-    }
-}
+// export const clearOrder = () => {
+//     return {
+//         type: CLEAR_ORDER
+//     }
+// }
 // ?

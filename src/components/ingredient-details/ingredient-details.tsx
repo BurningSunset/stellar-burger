@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 import { TIngredient, useSelector } from '../../utils/types';
 
 const IngredientDetails: FC = () => {
-    let currentIngredient: TIngredient = useSelector((state) => state.currentIngredient.ingredient);
-    // ПОКА ОСТАВЛЯЕМ! ПРОВЕРИТЬ ПОСЛЕ ТИПИЗАЦИИ РЕДЬЮСЕРОВ
-    // @ts-ignore
+    let currentIngredient: TIngredient | null = useSelector((state) => state.currentIngredient.ingredient);
     let ingredients: TIngredient[] = useSelector((state) => state.getIngredients.ingredients);
     const { ingredientId }: {ingredientId?: string} = useParams()
 

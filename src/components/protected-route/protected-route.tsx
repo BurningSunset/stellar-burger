@@ -11,7 +11,7 @@ type TProtectedProps = {
 const Protected: FC<TProtectedProps> = ({ onlyUnAuth = false, afterForgot = false, component }) => {
   const isAuthChecked: boolean = useSelector((store) => store.user.isAuthChecked);
   const location = useLocation();
-  const user: User = useSelector((store) => store.user.user);
+  const user: User | null = useSelector((store) => store.user.user);
 
   if (!isAuthChecked) {
     // попозже лоадер сюда добавим

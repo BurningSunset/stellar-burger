@@ -4,13 +4,19 @@ import {
     SET_BUN,
     SWAP_ITEMS
 } from '../actions/currentConstructorIngredients'
+import { TIngredient } from '../../utils/types'
+import { TConstructorIngredientsActions } from '../actions/currentConstructorIngredients'
+type TConstructorIngredientsState = {
+    bun: TIngredient | null,
+    ingredientList: TIngredient[] | []
+}
 
-const initialState = {
+const initialState: TConstructorIngredientsState = {
     bun: null,
     ingredientList: [],
 }
 
-export const currentConstructorIngredientsReducer = (state = initialState, action) => {
+export const currentConstructorIngredientsReducer = (state = initialState, action: TConstructorIngredientsActions): TConstructorIngredientsState => {
     switch (action.type) {
         case ADD_ITEM: {
             const newItem = {...action.item}

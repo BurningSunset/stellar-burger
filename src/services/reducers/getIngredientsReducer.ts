@@ -6,14 +6,22 @@ import {
     INCREASE_COUNTER,
     DECREASE_COUNTER,
 } from '../actions/getIngredients'
+import { TIngredient } from '../../utils/types'
+import { TGetIngredientsAction } from '../actions/getIngredients'
 
-const initialState = {
-    ingredients: [],
-    ingredientsRequest: false,
-    ingredientsError: null,
+type TGetIngredientsState = {
+    ingredients: TIngredient[] | [],
+    ingredientsRequest: boolean;
+    ingredientsError: Error | boolean
 }
 
-export const getIngredientsReducer = (state = initialState, action) => {
+const initialState: TGetIngredientsState = {
+    ingredients: [],
+    ingredientsRequest: false,
+    ingredientsError: false,
+}
+
+export const getIngredientsReducer = (state = initialState, action: TGetIngredientsAction): TGetIngredientsState => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -42,20 +50,19 @@ export const getIngredientsReducer = (state = initialState, action) => {
             const updatedState = { ...state };
             const currentIngredient = state.ingredients.find((item) => item._id === action.payload._id);
         
-            if (currentIngredient.type === 'bun') {
+            if (currentIngredient?.type === 'bun') {
                 updatedState.ingredients.forEach((item) => {
                     if (item.type === 'bun') {
                         item.counter = 0;
                     }
                 });
-                currentIngredient.counter = +currentIngredient.counter + 2;
-            } else {
-                currentIngredient.counter = +currentIngredient.counter + 1;
+                currentIngredient.counter = (currentIngredient.counter || 0) + 2;
+            } else if (currentIngredient) {
+                currentIngredient.counter = (currentIngredient.counter || 0) + 1;
             }
             return { ...updatedState };
         }
         
-        // Проверка на 
         case DECREASE_COUNTER: {
             return {
                 ...state,
@@ -63,7 +70,7 @@ export const getIngredientsReducer = (state = initialState, action) => {
                     if (item._id === action.payload) {
                         return {
                             ...item,
-                            counter: Math.max(0, item.counter - 1), // Гарантируем, что счетчик не будет уходить в отрицательные значения
+                            counter: Math.max(0, item.counter! - 1), // Гарантируем, что счетчик не будет уходить в отрицательные значения
                         };
                     } else {
                         // Возвращаем неизмененный элемент
