@@ -1,7 +1,8 @@
 .card {
     background-color: rgb(28, 28, 33);
     border-radius: 40px;
-    width: 584px;
+    min-width: 584px;
+    max-width: 844px;
 }
 
 .infoSpan {

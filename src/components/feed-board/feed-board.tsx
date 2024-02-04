@@ -41,16 +41,16 @@ const FeedBoard: FC = () => {
                 <div className={`${styles.orderStatus} mr-9`}>
                     <h2 className="text text_type_main-medium pb-6">Готовы:</h2>
                     <div className={`${styles.orderList}`}>
-                        {dummyDone.slice(0, maxVisibleOrders).map((item) => (
-                            <p className={`${styles.itemDone} text text_type_digits-default mb-2`}>{item}</p>
+                        {dummyDone.slice(0, maxVisibleOrders).map((item, index) => (
+                            <p key={index} className={`${styles.itemDone} text text_type_digits-default mb-2`}>{item}</p>
                         ))}
                     </div>
                 </div>
                 <div className={`${styles.orderStatus}`}>
                     <h2 className="text text_type_main-medium pb-6">В работе:</h2>
                     <div className={`${styles.orderList}`}>
-                        {dummyPending.slice(0, maxVisibleOrders).map((item) => (
-                            <p className="text text_type_digits-default mb-2">{item}</p>
+                        {dummyPending.slice(0, maxVisibleOrders).map((item, index) => (
+                            <p key={index} className="text text_type_digits-default mb-2">{item}</p>
                         ))}
                     </div>
                 </div>

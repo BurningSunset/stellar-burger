@@ -20,6 +20,7 @@ import OrderDetails from "../order-details/order-details";
 import { getIngredients } from "../../services/actions/getIngredients";
 
 import { TBackground, useDispatch } from "../../utils/types";
+import OrderInfo from "../order-info/order-info";
 
 const App: FC = () => {
   const dispatch = useDispatch()
@@ -61,9 +62,9 @@ const App: FC = () => {
           <Route path='/register' element={<OnlyUnAuth component={<RegisterPage />} />}/>
           <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
-          <Route path='/profile' element={<OnlyAuth component={<ProfilePage />} />} />
+          <Route path='/profile/*' element={<OnlyAuth component={<ProfilePage />} />} />
           <Route path='/feed' element={<FeedPage />} />
-          <Route path='/feed/:id' element={<OrderDetails />} />
+          <Route path='/feed/:id' element={<OrderInfo />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
         </Routes>
 
@@ -74,6 +75,14 @@ const App: FC = () => {
               element={
                 <Modal onHide={onHide} >
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+            <Route 
+              path='/feed/:id' 
+              element={
+                <Modal onHide={onHide} >
+                  <OrderInfo />
                 </Modal>
               }
             />

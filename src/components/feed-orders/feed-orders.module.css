@@ -1,6 +1,7 @@
 .feedContainer {
     max-height: 1000px;
     overflow: hidden;
+    max-width: 650px;
 }
 
 .h2 {

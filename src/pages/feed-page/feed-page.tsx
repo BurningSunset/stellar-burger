@@ -6,7 +6,7 @@ import FeedBoard from '../../components/feed-board/feed-board'
 const FeedPage: FC = () => {
     return (
         <div className={styles.feed}>
-            <FeedOrders />
+            <FeedOrders statusToggle={false} />
             <FeedBoard />
         </div>
     )

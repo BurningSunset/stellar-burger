@@ -32,7 +32,7 @@ const OrderItem: FC<Props> = ({item, statusToggle}) => {
     return (
         <Link
             key={orderId}
-            to={`/ingredients/${orderNumber}`}
+            to={`/feed/${orderId}`}
             state={{ background: location }}
             className={styles.link}
         >

@@ -6,6 +6,7 @@ import { TCurrentIngredientActions } from "../services/actions/currentIngredient
 import { TForgotPasswordActions } from "../services/actions/forgotPassword"
 import { TGetIngredientsAction } from "../services/actions/getIngredients"
 import { TTabActions } from "../services/actions/switchTab"
+import { TWsActions } from "../services/actions/wsActions"
 import { RootState } from ".."
 import {
     TypedUseSelectorHook,
@@ -101,6 +102,7 @@ export type AppActions =
     | TForgotPasswordActions
     | TGetIngredientsAction
     | TTabActions
+    | TWsActions
 
 // тип для ассинхронных экшенов (thunk)
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -136,3 +138,11 @@ export type TOrderResponse = {
     total: number;
     totalToday: number
 }
+
+export enum WebsocketStatus {
+    CONNECTING = 'CONNECTING...',
+    ONLINE = 'ONLINE',
+    OFFLINE = 'OFFLINE'
+}
+
+// 111
