@@ -15,7 +15,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../utils/api";
 
 import ProfilePage from "../../pages/profile-page/profile";
-import OrderPage from "../../pages/order-page/order";
+import FeedPage from "../../pages/feed-page/feed-page";
 import OrderDetails from "../order-details/order-details";
 import { getIngredients } from "../../services/actions/getIngredients";
 
@@ -62,7 +62,8 @@ const App: FC = () => {
           <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
           <Route path='/profile' element={<OnlyAuth component={<ProfilePage />} />} />
-          <Route path='/order' element={<OnlyAuth component={<OrderPage />} />} />
+          <Route path='/feed' element={<FeedPage />} />
+          <Route path='/feed/:number' element={<FeedPage />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
         </Routes>
 
@@ -88,3 +89,12 @@ const App: FC = () => {
 }
 
 export default App;
+
+
+/*
+
+компонент, который принимает массив данных? использовать и для history orders и для feed
+
+для feed:id и для orders:id тоже один компонент? структура одинаковая
+
+*/

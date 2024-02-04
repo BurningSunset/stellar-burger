@@ -38,10 +38,10 @@ const AppHeader: FC = () => {
                     </li>
                     <li className={`pl-5 pr-5 pt-4 pb-4`}>
                         <Link 
-                            className={getLinkClass('/order')} 
-                            to={`/order`}
+                            className={getLinkClass('/feed')} 
+                            to={`/feed`}
                         >
-                            <ListIcon type={getIconType('/order')}/>
+                            <ListIcon type={getIconType('/feed')}/>
                             <p className='ml-2 text text_type_main-default'>Лента заказов</p>
                         </Link>
                     </li>

@@ -117,3 +117,22 @@ export type AppDispatch<TReturnType = void> = (
 // типизация хуков
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+// для страниц с лентой
+export type TOrderItem = {
+    ingredients: string[],
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    owner?: string;
+    name: string;
+}
+
+export type TOrderResponse = {
+    success: boolean
+    orders: TOrderItem[],
+    total: number;
+    totalToday: number
+}
