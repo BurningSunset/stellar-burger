@@ -63,7 +63,7 @@ const App: FC = () => {
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
           <Route path='/profile' element={<OnlyAuth component={<ProfilePage />} />} />
           <Route path='/feed' element={<FeedPage />} />
-          <Route path='/feed/:number' element={<FeedPage />} />
+          <Route path='/feed/:id' element={<OrderDetails />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
         </Routes>
 

@@ -58,7 +58,7 @@ let initialState = {
             <div className={`${styles.menu}`}>
                 <ul>
                     <li className="text text_type_main-medium">Профиль</li>
-                    <Link to={'/order'}>
+                    <Link to={'/profile/order'}>
                         <li className="text text_type_main-medium text_color_inactive">История заказов</li>
                     </Link>
                     <li className="text text_type_main-medium text_color_inactive" onClick={logoutHandler}>Выход</li>
