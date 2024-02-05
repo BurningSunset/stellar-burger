@@ -1,15 +1,10 @@
 import { FC } from 'react';
 import styles from './ingredient-details.module.css'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, useSelector } from '../../utils/types';
 
 const IngredientDetails: FC = () => {
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
-    let currentIngredient: TIngredient = useSelector((state) => state.currentIngredient.ingredient);
-    // @ts-ignore
+    let currentIngredient: TIngredient | null = useSelector((state) => state.currentIngredient.ingredient);
     let ingredients: TIngredient[] = useSelector((state) => state.getIngredients.ingredients);
     const { ingredientId }: {ingredientId?: string} = useParams()
 
@@ -20,9 +15,10 @@ const IngredientDetails: FC = () => {
 
     return (
         <div className={styles.ingredientContainer}>
+            <h2 className="text text_type_main-medium">Детали ингредиента</h2>
             {currentIngredient ? (
-                <>
-                    <img className={styles.ingredientImage} src={currentIngredient.image} alt={currentIngredient.name}></img>
+                <>  
+                    <img className={styles.ingredientImage} src={currentIngredient.image_large} alt={currentIngredient.name}></img>
                     <p className="text text_type_main-medium mb-8 mt-4">{currentIngredient.name}</p>
                     <div className={`text text_type_main-default text_color_inactive ${styles.ingredientParamList}`}>
                         <div className={`mr-5 ${styles.ingredientParam}`}>

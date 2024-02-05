@@ -1,13 +1,9 @@
 import styles from './order-details.module.css'
 import succesIcon from '../../images/graphics.svg'
-import { useSelector } from 'react-redux'
-import { TOrder } from '../../utils/types'
+import { TOrder, useSelector } from '../../utils/types'
 
 const OrderDetails = () => {
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
-    const { order }: { order: TOrder } = useSelector((state) => state.createOrder)
+    const { order }: { order: TOrder | null } = useSelector((state) => state.createOrder)
     return (
         <div className={styles.orderContainer}>
             {order ? 

@@ -3,7 +3,7 @@ import { checkResponse } from "./checkResponse";
 import { URL } from "./apiConst";
 import { setUser, setAuthChecked } from "../services/actions/checkUserAuth";
 import { Dispatch } from "redux";
-import { TLogin, TResponse, TRegister, TPassResponse, TPatchResponse } from "./types";
+import { TLogin, TResponse, TRegister, TPassResponse, TPatchResponse, AppDispatch } from "./types";
 
 export const getUser = () => {
   return async (dispatch: Dispatch) => {
@@ -21,9 +21,8 @@ export const getUser = () => {
     }
   };
 };
-
 export const checkUserAuth = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: AppDispatch) => {
       if (localStorage.getItem("accessToken")) {
         try {
           await dispatch(getUser())
@@ -42,7 +41,7 @@ export const checkUserAuth = () => {
 };
 
 export const login = ({ email, password }: TLogin) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: AppDispatch) => {
   const response: TResponse = await fetch(`${URL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -61,7 +60,7 @@ export const login = ({ email, password }: TLogin) => {
 }
 
 export const logout = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: AppDispatch) => {
   fetch(`${URL}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -78,7 +77,7 @@ export const logout = () => {
 }
 
 export const register = ({ name, email, password }: TRegister) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: AppDispatch) => {
   const response: TResponse = await fetch(`${URL}/auth/register`, {
       method: 'POST',
       headers: {

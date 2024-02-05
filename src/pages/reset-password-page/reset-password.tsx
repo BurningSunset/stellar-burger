@@ -1,14 +1,13 @@
 import styles from './reset-password.module.css'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch } from 'react-redux'
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { forgotTokenDelete, reset } from '../../utils/api'
 import { Link, useNavigate } from 'react-router-dom'
-import { Dispatch } from 'redux'
+import { useDispatch } from '../../utils/types'
 
 const ResetPasswordPage: FC = () => {
     const navigate = useNavigate()
-    const dispatch: Dispatch<any> = useDispatch()
+    const dispatch = useDispatch()
     const initialState = {
         password: '',
         token: ''

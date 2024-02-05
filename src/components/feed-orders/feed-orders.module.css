@@ -1,0 +1,24 @@
+.feedContainer {
+    max-height: 1000px;
+    overflow: hidden;
+    max-width: 650px;
+}
+
+.h2 {
+    height: 40px;
+}
+
+.feedBlock {
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    max-height: 765px;
+}
+.feedBlock::-webkit-scrollbar {
+    width: 8px;
+}
+.feedBlock::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.feedBlock::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}

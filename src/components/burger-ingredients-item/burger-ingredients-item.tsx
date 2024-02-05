@@ -2,10 +2,9 @@ import styles from './burger-ingredients-item.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../utils/itemTypes'
-import { useDispatch } from 'react-redux'
 import { incrementCounter } from '../../services/actions/getIngredients'
 import { useLocation, Link } from "react-router-dom";
-import { TIngredient } from '../../utils/types'
+import { TIngredient, useDispatch } from '../../utils/types'
 import { FC } from 'react'
 
 const BurgerIngredientsItem: FC<TIngredient> = (item) => {

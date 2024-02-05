@@ -1,3 +1,20 @@
+import { ThunkAction } from "redux-thunk"
+import { TUserAuthActions } from "../services/actions/checkUserAuth"
+import { TOrderActions } from "../services/actions/createOrder"
+import { TConstructorIngredientsActions } from "../services/actions/currentConstructorIngredients"
+import { TCurrentIngredientActions } from "../services/actions/currentIngredient"
+import { TForgotPasswordActions } from "../services/actions/forgotPassword"
+import { TGetIngredientsAction } from "../services/actions/getIngredients"
+import { TTabActions } from "../services/actions/switchTab"
+import { TWsActions } from "../services/actions/wsActions"
+import { RootState } from ".."
+import {
+    TypedUseSelectorHook,
+    useDispatch as dispatchHook,
+    useSelector as selectorHook,
+  } from "react-redux";
+import { TGetOrderActions } from "../services/actions/orderInfo"
+
 export type TIngredient = {
     _id: string,
     name: string,
@@ -12,7 +29,12 @@ export type TIngredient = {
     image_large: string,
     __v: number,
     counter?: number,
-    uid?: number
+    uid?: string
+}
+
+export type TIngredientResponse = {
+    data: TIngredient[],
+    success: boolean
 }
 
 export type TOrder = {
@@ -70,4 +92,62 @@ export type TBackground = {
     pathname: string;
     search: string;
     state: null;
+}
+
+// типы экшенов всех редьюсеров в один тип
+export type AppActions = 
+    | TUserAuthActions
+    | TOrderActions
+    | TConstructorIngredientsActions
+    | TCurrentIngredientActions
+    | TForgotPasswordActions
+    | TGetIngredientsAction
+    | TTabActions
+    | TWsActions
+    | TGetOrderActions
+
+// тип для ассинхронных экшенов (thunk)
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    AppActions
+>
+// тип диспатча
+export type AppDispatch<TReturnType = void> = (
+    action: AppActions | AppThunk<TReturnType>
+  ) => TReturnType;
+
+// типизация хуков
+export const useDispatch: () => AppDispatch = dispatchHook;
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+// для страниц с лентой
+export type TOrderItem = {
+    ingredients: string[],
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    owner?: string;
+    name: string;
+}
+
+export type TOrderResponse = {
+    success: boolean
+    orders: TOrderItem[],
+    total?: number;
+    totalToday?: number
+}
+
+// то что мы получаем при GET-запросе конкретного заказа
+
+export type TGetOrderResponse = {
+    order: {
+        order: {
+            orders: TOrderItem[],
+            success: boolean
+        }
+    }
 }

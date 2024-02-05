@@ -1,7 +1,6 @@
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { FC, ReactElement } from "react";
-import { User } from "../../utils/types";
+import { User, useSelector } from "../../utils/types";
 
 type TProtectedProps = {
   onlyUnAuth?: boolean;
@@ -10,13 +9,9 @@ type TProtectedProps = {
 }
 
 const Protected: FC<TProtectedProps> = ({ onlyUnAuth = false, afterForgot = false, component }) => {
-    // игнор так как по условию спринта
-    // можно пока что не типизировать стор
-    // @ts-ignore
   const isAuthChecked: boolean = useSelector((store) => store.user.isAuthChecked);
   const location = useLocation();
-    // @ts-ignore
-  const user: User = useSelector((store) => store.user.user);
+  const user: User | null = useSelector((store) => store.user.user);
 
   if (!isAuthChecked) {
     // попозже лоадер сюда добавим

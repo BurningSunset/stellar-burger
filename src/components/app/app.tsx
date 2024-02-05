@@ -13,17 +13,17 @@ import { FC, useEffect, useState } from "react";
 import RegisterPage from "../../pages/register-page/register";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { checkUserAuth } from "../../utils/api";
-import { useDispatch } from "react-redux";
+
 import ProfilePage from "../../pages/profile-page/profile";
-import OrderPage from "../../pages/order-page/order";
+import FeedPage from "../../pages/feed-page/feed-page";
 import OrderDetails from "../order-details/order-details";
 import { getIngredients } from "../../services/actions/getIngredients";
 
-import { Dispatch } from "redux";
-import { TBackground } from "../../utils/types";
+import { TBackground, useDispatch } from "../../utils/types";
+import OrderInfo from "../order-info/order-info";
 
 const App: FC = () => {
-  const dispatch: Dispatch<any> = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -62,9 +62,11 @@ const App: FC = () => {
           <Route path='/register' element={<OnlyUnAuth component={<RegisterPage />} />}/>
           <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
-          <Route path='/profile' element={<OnlyAuth component={<ProfilePage />} />} />
-          <Route path='/order' element={<OnlyAuth component={<OrderPage />} />} />
+          <Route path='/profile/*' element={<OnlyAuth component={<ProfilePage />} />} />
+          <Route path='/feed' element={<FeedPage />} />
+          <Route path='/feed/:number' element={<OrderInfo />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
+          <Route path='/profile/orders/:number' element={<OnlyAuth component={<OrderInfo />} />} />
         </Routes>
 
         {background && (
@@ -74,6 +76,22 @@ const App: FC = () => {
               element={
                 <Modal onHide={onHide} >
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+            <Route 
+              path='/feed/:number' 
+              element={
+                <Modal onHide={onHide} >
+                  <OrderInfo />
+                </Modal>
+              }
+            />
+            <Route 
+              path='/profile/orders/:number' 
+              element={
+                <Modal onHide={onHide} >
+                  <OrderInfo />
                 </Modal>
               }
             />
@@ -89,3 +107,12 @@ const App: FC = () => {
 }
 
 export default App;
+
+
+/*
+
+компонент, который принимает массив данных? использовать и для history orders и для feed
+
+для feed:id и для orders:id тоже один компонент? структура одинаковая
+
+*/
