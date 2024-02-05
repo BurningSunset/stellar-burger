@@ -12,7 +12,8 @@ export interface IWsConnectionStart {
 }
 
 export interface IWsConnectionSuccess {
-    type: typeof WS_CONNECTION_SUCCESS;
+    readonly type: typeof WS_CONNECTION_SUCCESS;
+    readonly payload?: null
 }
 
 export interface IWsConnectionError {
@@ -21,29 +22,30 @@ export interface IWsConnectionError {
 }
 
 export interface IWsConnectionClosed {
-    type: typeof WS_CONNECTION_CLOSED;
+    readonly type: typeof WS_CONNECTION_CLOSED;
+    readonly payload?: null
 }
 
 export interface IWsGetOrders {
     readonly type: typeof WS_GET_ORDERS;
-    readonly payload: object;
+    readonly payload: TOrderResponse;
 }
 
-export const wsConnectionStartDispatch = (payload?: string) => ({
+export const wsConnectionStartDispatch = (payload: string) => ({
     type: WS_CONNECTION_START,
     payload: payload
 })
 export const wsConnectionSuccessDispatch = () => ({
-    type: WS_CONNECTION_SUCCESS
+    type: WS_CONNECTION_SUCCESS,
 })
-export const wsConnectionErrorDispatch = (payload?: string) => ({
+export const wsConnectionErrorDispatch = (payload: string) => ({
     type: WS_CONNECTION_ERROR,
     payload: payload
 })
 export const wsConnectionClosedDispatch = () => ({
-    type: WS_CONNECTION_CLOSED
+    type: WS_CONNECTION_CLOSED,
 })
-export const wsgetOrdersDispatch = (payload?: TOrderResponse[]) => ({
+export const wsgetOrdersDispatch = (payload: TOrderResponse) => ({
     type: WS_GET_ORDERS,
     payload: payload
 })
@@ -55,3 +57,18 @@ export type TWsActions =
     | IWsConnectionClosed
     | IWsGetOrders
 
+    export type TWSStoreActions = {
+        wsInit: typeof  WS_CONNECTION_START,
+        wsGetOrders: typeof  WS_GET_ORDERS,
+        onOpen: typeof  WS_CONNECTION_SUCCESS,
+        onClose: typeof WS_CONNECTION_CLOSED,
+        onError: typeof  WS_CONNECTION_ERROR,
+    };
+
+    export const wsActions: TWSStoreActions = {
+        wsInit:  WS_CONNECTION_START,
+        wsGetOrders:  WS_GET_ORDERS,
+        onOpen:  WS_CONNECTION_SUCCESS,
+        onClose: WS_CONNECTION_CLOSED,
+        onError:  WS_CONNECTION_ERROR,
+    };

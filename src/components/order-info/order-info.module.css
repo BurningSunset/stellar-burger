@@ -1,0 +1,68 @@
+.orderContainer {
+    max-width: 640px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ingredientsContainer {
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    max-height: 300px;
+    width: 640px;
+}
+.ingredientsContainer::-webkit-scrollbar {
+    width: 8px;
+}
+.ingredientsContainer::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.ingredientsContainer::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+.image {
+    background-color: #131316;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    border: 2px solid #4a288a;
+    border-radius: 50%;
+}
+
+.number {
+    text-align: center;
+}
+
+.number .modal {
+    margin-top: -46px
+}
+
+.number .page {
+    margin-top: 30px
+}
+
+
+.entryContainer {
+    display: flex;
+    align-items: center;
+    height: 64px;
+}
+
+.orderDone {
+    color: #00cccc
+}
+
+.price {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.price svg {
+    margin-left: 4px
+}
+.summ {
+    display: flex;
+    justify-content: space-around;
+}

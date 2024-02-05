@@ -64,8 +64,9 @@ const App: FC = () => {
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
           <Route path='/profile/*' element={<OnlyAuth component={<ProfilePage />} />} />
           <Route path='/feed' element={<FeedPage />} />
-          <Route path='/feed/:id' element={<OrderInfo />} />
+          <Route path='/feed/:number' element={<OrderInfo />} />
           <Route path='/ingredients/:ingredientId' element={<IngredientDetails/>}/>
+          <Route path='/profile/orders/:number' element={<OnlyAuth component={<OrderInfo />} />} />
         </Routes>
 
         {background && (
@@ -79,7 +80,15 @@ const App: FC = () => {
               }
             />
             <Route 
-              path='/feed/:id' 
+              path='/feed/:number' 
+              element={
+                <Modal onHide={onHide} >
+                  <OrderInfo />
+                </Modal>
+              }
+            />
+            <Route 
+              path='/profile/orders/:number' 
               element={
                 <Modal onHide={onHide} >
                   <OrderInfo />

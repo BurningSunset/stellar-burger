@@ -2,37 +2,43 @@ import type { Middleware, MiddlewareAPI } from 'redux';
 
 import { AppActions, AppDispatch } from '../../utils/types';
 import { RootState } from '../..';
-import { WS_CONNECTION_START } from '../actions/wsActions';
+import { TWSStoreActions, TWsActions } from '../actions/wsActions';
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
+export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions): Middleware => {
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
         let socket: WebSocket | null = null;
 
-    return next => (action: AppActions) => {
+    return next => (action: TWsActions) => {
       const { dispatch } = store;
-      // @ts-ignore
       const { type, payload } = action;
-        console.log('if!')
-      if (type === WS_CONNECTION_START) {
-        socket = new WebSocket(wsUrl);
-        console.log('socket trig')
+      const { wsInit, wsGetOrders, onOpen, onClose, onError } = wsActions;
+      if (type === wsInit) {
+        if (payload !== '/') {
+            socket = new WebSocket(`${wsUrl}${payload}`);
+        } else {
+            socket = new WebSocket(`${wsUrl}?token=${localStorage.getItem('accessToken')?.split('Bearer ').join('')}`);
+        }
       }
       if (socket) {
-        socket.onopen = event => {
-          dispatch({ type: 'WS_CONNECTION_SUCCESS'});
+        socket.onopen = () => {
+          dispatch({ type: onOpen});
         };
         socket.onerror = event => {
-          dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
+          dispatch({ type: onError, payload: event });
         };
         socket.onmessage = event => {
           const { data } = event;
-          dispatch({ type: 'WS_GET_ORDERS', payload: data });
+          dispatch({ type: wsGetOrders, payload: data });
         };
-                // функция, которая вызывается при закрытии соединения
-        socket.onclose = event => {
-          dispatch({ type: 'WS_CONNECTION_CLOSED'});
-        };
-
+        // код из примеров не работает...
+        // socket.onclose = () => {
+        //   dispatch({ type: onClose});
+        // };
+        if (type === onClose && socket) {
+            socket.close()
+            socket = null
+            dispatch({ type: onClose});
+        }
       }
 
       next(action);

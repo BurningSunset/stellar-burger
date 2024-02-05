@@ -4,12 +4,20 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from '../../utils/types'
 import ProfileForm from '../../components/profile-form/profile-form'
 import FeedOrders from '../../components/feed-orders/feed-orders'
+import { wsConnectionClosedDispatch, wsConnectionStartDispatch } from '../../services/actions/wsActions'
+import { useEffect } from 'react'
 
 const ProfilePage = () => {
 const dispatch = useDispatch()
 const navigate = useNavigate()
 const location = useLocation();
 const isOrdersPage = location.pathname.includes('/profile/orders');
+    useEffect(() => {
+        dispatch(wsConnectionStartDispatch('/'))
+        return () => {
+            dispatch(wsConnectionClosedDispatch())
+          }
+    }, [dispatch])
 
     const logoutHandler = async () => {
         try {
@@ -25,10 +33,10 @@ const isOrdersPage = location.pathname.includes('/profile/orders');
             <div className={`${styles.menu}`}>
                 <ul>
                     <Link to={'/profile'}>
-                        <li className="text text_type_main-medium">Профиль</li>
+                        <li className={`text text_type_main-medium ${isOrdersPage ? `text_color_inactive` : ''} `}>Профиль</li>
                     </Link>
                     <Link to={'/profile/orders'}>
-                        <li className="text text_type_main-medium text_color_inactive">История заказов</li>
+                        <li className={`text text_type_main-medium ${!isOrdersPage ? `text_color_inactive` : ''}`}>История заказов</li>
                     </Link>
                     <li className="text text_type_main-medium text_color_inactive" onClick={logoutHandler}>Выход</li>
                 </ul>

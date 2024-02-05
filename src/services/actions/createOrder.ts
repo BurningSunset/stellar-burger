@@ -47,7 +47,8 @@ export const submitOrder = (ingredients: TIngredient[]): AppThunk => {
         fetch(`${URL}/orders`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json;charset=utf-8',
+                authorization: `${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({ ingredients: ingredients.map(item => item._id) })
         })

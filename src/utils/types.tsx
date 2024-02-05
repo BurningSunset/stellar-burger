@@ -13,6 +13,7 @@ import {
     useDispatch as dispatchHook,
     useSelector as selectorHook,
   } from "react-redux";
+import { TGetOrderActions } from "../services/actions/orderInfo"
 
 export type TIngredient = {
     _id: string,
@@ -103,6 +104,7 @@ export type AppActions =
     | TGetIngredientsAction
     | TTabActions
     | TWsActions
+    | TGetOrderActions
 
 // тип для ассинхронных экшенов (thunk)
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -135,14 +137,17 @@ export type TOrderItem = {
 export type TOrderResponse = {
     success: boolean
     orders: TOrderItem[],
-    total: number;
-    totalToday: number
+    total?: number;
+    totalToday?: number
 }
 
-export enum WebsocketStatus {
-    CONNECTING = 'CONNECTING...',
-    ONLINE = 'ONLINE',
-    OFFLINE = 'OFFLINE'
-}
+// то что мы получаем при GET-запросе конкретного заказа
 
-// 111
+export type TGetOrderResponse = {
+    order: {
+        order: {
+            orders: TOrderItem[],
+            success: boolean
+        }
+    }
+}

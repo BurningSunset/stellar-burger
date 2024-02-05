@@ -9,12 +9,14 @@ import thunk from 'redux-thunk';
 import { rootReducer } from './services/reducers/rootReducer'
 import { BrowserRouter } from 'react-router-dom';
 import type {} from "redux-thunk/extend-redux";
+import { socketMiddleware } from './services/middleware/socketMiddleware';
+import { wsActions } from './services/actions/wsActions';
 
 const composeEnhancers =
   typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware('wss://norma.nomoreparties.space/orders', wsActions)));
 
 const store = createStore(rootReducer, enhancer);
 const root = ReactDOM.createRoot(

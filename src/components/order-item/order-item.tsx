@@ -25,14 +25,14 @@ const OrderItem: FC<Props> = ({item, statusToggle}) => {
         .map((item) => {
             const ingredient = allIngredients.find((ingredient) => ingredient._id === item);
 
-            return ingredient ? (ingredient.type === 'bun' ? ingredient.price * 2 : ingredient.price) : 0;
+            return ingredient ? ingredient.price : 0;
         })
         .reduce((acc, price) => acc + price, 0);
 
     return (
         <Link
             key={orderId}
-            to={`/feed/${orderId}`}
+            to={`${location.pathname}/${orderNumber}`}
             state={{ background: location }}
             className={styles.link}
         >
@@ -42,7 +42,6 @@ const OrderItem: FC<Props> = ({item, statusToggle}) => {
                     <p className='text text_type_main-default text_color_inactive'>{item.createdAt}</p>
                 </span>
                 <p className="text text_type_main-medium mt-6">{item.name}</p>
-                {/* проверено, работает V */}
                 {statusToggle && (
                     <span className='text text_type_main-default'>
                     {(() => {

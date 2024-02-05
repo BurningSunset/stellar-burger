@@ -7,6 +7,7 @@ import { createOrderReducer } from './createOrderReducer'
 import { userReducer } from './userReducer'
 import { resetPasswordReducer } from './resetPasswordReducer'
 import { wsReducer } from './wsReducer'
+import { getOrderInfoReducer } from './orderInfoReducer'
 
 export const rootReducer = combineReducers({
     getIngredients: getIngredientsReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     createOrder: createOrderReducer,
     user: userReducer,
     resetPassword: resetPasswordReducer,
-    ws: wsReducer
+    ws: wsReducer,
+    getOrderInfo: getOrderInfoReducer
 })
