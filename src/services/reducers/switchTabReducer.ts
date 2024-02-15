@@ -4,7 +4,7 @@ type TTabState = {
     currentTab: string
 }
 
-const initialState: TTabState = {
+export const initialState: TTabState = {
     currentTab: 'bun'
 }
 

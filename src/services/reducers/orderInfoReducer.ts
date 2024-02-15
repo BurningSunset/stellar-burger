@@ -12,7 +12,7 @@ type TGetOrderState = {
     orderError: Error | boolean
 }
 
-const initialState: TGetOrderState = {
+export const initialState: TGetOrderState = {
     order: undefined,
     orderRequest: false,
     orderError: false,
