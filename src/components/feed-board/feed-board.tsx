@@ -5,8 +5,7 @@ import { TOrderItem, useSelector } from '../../utils/types'
 
 const FeedBoard: FC = () => {
     const { response } = useSelector((state) => state.ws)
-    const data = JSON.parse(response)
-    
+    const data = response ? JSON.parse(response) : null;
     const maxVisibleOrders = 15
 
     let doneOrders: number[] = []

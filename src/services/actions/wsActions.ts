@@ -28,7 +28,7 @@ export interface IWsConnectionClosed {
 
 export interface IWsGetOrders {
     readonly type: typeof WS_GET_ORDERS;
-    readonly payload: TOrderResponse;
+    readonly payload: string;
 }
 
 export const wsConnectionStartDispatch = (payload: string) => ({

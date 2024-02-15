@@ -10,7 +10,7 @@ import {
 type TWsState = {
     wsConnected: boolean;
     wsError: Error | boolean;
-    response: TOrderResponse | null;
+    response: string | null;
 }
 
 export const initialState: TWsState = {
