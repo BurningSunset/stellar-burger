@@ -18,6 +18,7 @@ export const ingredientBunDummy = {
     type: 'bun'
 }
 
+// для order-info
 export const orderDummy = {
     ingredients: ['111', '222', '333'],
     _id: '_id',
@@ -33,4 +34,12 @@ export const dummyOrderResponse = {
     orders: [orderDummy],
     total: 1,
     totalToday: 2
+}
+// для create-order
+export const createOrderDummy = {
+    success: true,
+    name: 'test',
+    order: {
+        number: 333
+    }
 }

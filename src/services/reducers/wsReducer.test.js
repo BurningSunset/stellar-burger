@@ -48,10 +48,10 @@ it('should handle WS_CONNECTION_CLOSED', () => {
 it('should handle WS_GET_ORDERS', () => {
     const action = { 
         type: WS_GET_ORDERS,
-        payload: {}
+        payload: '{a lot of different stuff}'
     }
     expect(wsReducer(initialState, action)).toEqual({
         ...initialState,
-        response: {}
+        response: '{a lot of different stuff}'
     })
 })
