@@ -34,7 +34,7 @@ const BurgerConstructorItem: FC<Item> = ({item, uid, isLocked, extraClass, type,
     })
     drag(drop(ref))
     return (
-        <div className={styles.itemBlock} ref={ref}>
+        <div className={styles.itemBlock} ref={ref} data-consitem={uid}>
             {isLocked !== true &&
                 <DragIcon type="primary" />
             }

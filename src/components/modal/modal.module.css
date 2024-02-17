@@ -15,8 +15,7 @@
     align-items: center;
     height: 64px;
 }
-/* стилизуем крестик (в DOM это svg) */
-.header svg {
+.closeButton {
     cursor: pointer;
     margin-left: auto
 }

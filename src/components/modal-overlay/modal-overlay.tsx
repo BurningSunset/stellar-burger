@@ -24,7 +24,7 @@ const ModalOverlay: FC<Props> = ({ children, onHide }) => {
             document.removeEventListener('keydown', escClickHandler)
     },[])
     return (
-        <div className={`${styles.overlay}`} onClick={overlayClickHandler}>
+        <div data-modal='modal-overlay' className={styles.overlay} onClick={overlayClickHandler}>
             {children}
         </div>
     )

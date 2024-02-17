@@ -61,7 +61,7 @@ const BurgerConstructor: FC<Props> = ({ showModal }) => {
 
     return (
         <section className={`pt-25 ${styles.section} ml-4 mr-4`}>
-            <div ref={drop} className={`${styles.block}`}>
+            <div ref={drop} data-drop={'drop'} className={`${styles.block}`}>
                 {bun && <BurgerConstructorItem
                     extraClass='ml-8'
                     type="top"

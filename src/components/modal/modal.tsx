@@ -23,7 +23,9 @@ const Modal: FC<Props> = ({children, title, onHide}) => {
                     {title && (
                         <h2 className={`${styles.title} text text_type_main-large`}>{title}</h2>
                     )}
-                    <CloseIcon type="primary" onClick={onHide} />
+                    <div className={styles.closeButton} data-button='closeButton'>
+                        <CloseIcon type="primary" onClick={onHide} />
+                    </div>
                 </div>
                 {children}
             </div>
