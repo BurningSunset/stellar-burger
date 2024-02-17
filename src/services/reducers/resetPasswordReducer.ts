@@ -1,5 +1,6 @@
 import { CODE_REQUEST, TForgotPasswordActions } from "../actions/forgotPassword";
 import { User } from "../../utils/types"
+
 type TResetPasswordState = {
   user: User | null
   isAuthChecked: boolean

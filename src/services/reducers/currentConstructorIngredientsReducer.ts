@@ -6,6 +6,7 @@ import {
 } from '../actions/currentConstructorIngredients'
 import { TIngredient } from '../../utils/types'
 import { TConstructorIngredientsActions } from '../actions/currentConstructorIngredients'
+
 type TConstructorIngredientsState = {
     bun: TIngredient | null,
     ingredientList: TIngredient[] | []

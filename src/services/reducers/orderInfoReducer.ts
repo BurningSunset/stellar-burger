@@ -5,7 +5,6 @@ import {GET_ORDER_REQUEST,
 
 import { TOrderResponse } from '../../utils/types'
 
-
 type TGetOrderState = {
     order?: TOrderResponse,
     orderRequest: boolean,

@@ -1,3 +1,4 @@
+// данные для тестов
 export const ingredientDummy = {
     _id: 'nonBunId',
     name: 'string',

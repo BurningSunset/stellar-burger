@@ -1,4 +1,3 @@
-import { TOrderResponse } from "../../utils/types";
 import {    
             WS_CONNECTION_SUCCESS,
             WS_CONNECTION_ERROR,
