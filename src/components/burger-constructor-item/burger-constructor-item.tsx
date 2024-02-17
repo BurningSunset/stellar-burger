@@ -43,7 +43,7 @@ const BurgerConstructorItem: FC<Item> = ({item, uid, isLocked, extraClass, type,
                         extraClass={extraClass ? `${extraClass} ml-2 ${styles.spanOnMiddle}` : `ml-2 ${styles.spanOnMiddle}`}
                         text='Заглушка'
                         price={0}
-                        thumbnail='Заглушка'
+                        thumbnail=''
                         type={type}
                         isLocked={isLocked}
                     /> ) : (
