@@ -15,7 +15,7 @@ type TGetIngredientsState = {
     ingredientsError: Error | boolean
 }
 
-const initialState: TGetIngredientsState = {
+export const initialState: TGetIngredientsState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,

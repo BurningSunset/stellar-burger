@@ -39,7 +39,7 @@ const BurgerIngredientsItem: FC<TIngredient> = (item) => {
             state={{ background: location }}
             className={styles.link}
         >
-            <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }}>
+            <div ref={drag} className={`${styles.card}`} style={{ ...styles, opacity }} data-card={item._id}>
                 <div className={`${styles.counter} `}>
                     {item.counter !== 0 && <Counter count={item.counter!}/> }
                 </div>

@@ -5,14 +5,13 @@ import {GET_ORDER_REQUEST,
 
 import { TOrderResponse } from '../../utils/types'
 
-
 type TGetOrderState = {
     order?: TOrderResponse,
     orderRequest: boolean,
     orderError: Error | boolean
 }
 
-const initialState: TGetOrderState = {
+export const initialState: TGetOrderState = {
     order: undefined,
     orderRequest: false,
     orderError: false,

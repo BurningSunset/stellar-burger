@@ -1,5 +1,4 @@
 import {    
-            WS_CONNECTION_START,
             WS_CONNECTION_SUCCESS,
             WS_CONNECTION_ERROR,
             WS_CONNECTION_CLOSED,
@@ -9,11 +8,11 @@ import {
 
 type TWsState = {
     wsConnected: boolean;
-    wsError: Error | boolean
-    response: any;
+    wsError: Error | boolean;
+    response: string | null;
 }
 
-const initialState: TWsState = {
+export const initialState: TWsState = {
     wsConnected: false,
     wsError: false,
     response: null
@@ -31,16 +30,16 @@ export const wsReducer = (state = initialState, action: TWsActions): TWsState =>
             ...state,
             wsError: action.payload
           }
-          case WS_CONNECTION_CLOSED:
-            return {
-              ...state,
-              wsConnected: false
-            }
-            case WS_GET_ORDERS:
-                return {
-                  ...state,
-                  response: action.payload
-                }
+        case WS_CONNECTION_CLOSED:
+          return {
+            ...state,
+            wsConnected: false
+          }
+        case WS_GET_ORDERS:
+          return {
+            ...state,
+            response: action.payload
+          }
         default:
           return state;    
       }

@@ -10,7 +10,7 @@ type Props = {
 
 const FeedOrders: FC<Props> = ({ statusToggle }) => {
     const { response } = useSelector((state) => state.ws)
-    const data = JSON.parse(response)
+    const data = response ? JSON.parse(response) : null;
     return (
         <div className={styles.feedContainer}>
             {!statusToggle && (
