@@ -5,7 +5,7 @@
 ## Демонстрация
 
 Посмотреть работоспособность проекта вы можете по ссылке:\
-[https://burningsunset.github.io/](https://burningsunset.github.io/)
+[https://burningsunset.github.io/stellar-burger/](https://burningsunset.github.io/stellar-burger/)
 
 ## Технологии
 
