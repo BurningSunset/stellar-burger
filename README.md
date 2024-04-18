@@ -5,7 +5,7 @@
 ## Демонстрация
 
 Посмотреть работоспособность проекта вы можете по ссылке:\
-[https://practicum.vysolo.nomoredomainswork.ru/](https://practicum.vysolo.nomoredomainswork.ru/)
+[https://burningsunset.github.io/](https://burningsunset.github.io/)
 
 ## Технологии
 
